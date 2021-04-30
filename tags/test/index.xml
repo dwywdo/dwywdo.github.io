@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Test on DWYWDO</title>
+    <title>Test on dwywdo</title>
     <link>https://dwywdo.github.io/tags/test/</link>
-    <description>Recent content in Test on DWYWDO</description>
+    <description>Recent content in Test on dwywdo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 25 Apr 2021 10:48:36 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/tags/test/index.xml" rel="self" type="application/rss+xml" />
