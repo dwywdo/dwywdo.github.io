@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Junit - 2 // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Junit - 2"/>
+<meta name="twitter:description" content="Custom Tag   JUnit5가 제공하는 애노테이션들은 Meta Annotation이기 때문에, Composed Annotation을 만들어서 사용할 수 있다. 커스텀한 애노테이션을 만들 때, 그 위에 저 Meta Annotation을 사용할 수 있다는 의미이다. 커스텀 애노테이션 선언 @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다. @Test // Jupiter가 제공하는 애노테이션 @Tag(&#34;fast&#34;) public @interface FastTest { } @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다."/>
+
+    <meta property="og:title" content="Junit - 2" />
+<meta property="og:description" content="Custom Tag   JUnit5가 제공하는 애노테이션들은 Meta Annotation이기 때문에, Composed Annotation을 만들어서 사용할 수 있다. 커스텀한 애노테이션을 만들 때, 그 위에 저 Meta Annotation을 사용할 수 있다는 의미이다. 커스텀 애노테이션 선언 @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다. @Test // Jupiter가 제공하는 애노테이션 @Tag(&#34;fast&#34;) public @interface FastTest { } @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/junit-2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-21T03:54:36&#43;09:00" />
+<meta property="article:modified_time" content="2021-03-21T03:54:36&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Junit - 2</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 21, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/java/">Java</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/test/">Test</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="custom-tag">Custom Tag</h2>
+<hr>
+<ul>
+<li>JUnit5가 제공하는 애노테이션들은 Meta Annotation이기 때문에, Composed Annotation을 만들어서 사용할 수 있다.</li>
+<li>커스텀한 애노테이션을 만들 때, 그 위에 저 Meta Annotation을 사용할 수 있다는 의미이다.</li>
+<li>커스텀 애노테이션 선언
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">METHOD</span><span style="color:#f92672">)</span> <span style="color:#75715e">// 애노테이션 적용 대상: 메소드
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span> <span style="color:#75715e">// Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Test</span> <span style="color:#75715e">// Jupiter가 제공하는 애노테이션
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Tag</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fast&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> FastTest <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">METHOD</span><span style="color:#f92672">)</span> <span style="color:#75715e">// 애노테이션 적용 대상: 메소드
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span> <span style="color:#75715e">// Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Test</span> <span style="color:#75715e">// Jupiter가 제공하는 애노테이션
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Tag</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;slow&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> SlowTest <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>커스텀 애노테이션 사용
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomTagTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@FastTest</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fastTest</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Do some fast test
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+    <span style="color:#a6e22e">@SlowTest</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">slowTest</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Do some slow test
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span> 
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+<h2 id="테스트-반복하기">테스트 반복하기</h2>
+<hr>
+<ul>
+<li>테스트 실행 시마다 랜덤한 값을 쓴다던가, 실행되는 타이밍에 따라 달라지는 조건이 있다던가 할 때, 여러 번 반복해서 테스트를 수행할 수 있다.
+<ul>
+<li>기본적으로는 <code>@RepeatedTest(10)</code>과 같이 사용한다.
+<ul>
+<li><code>@DisplayName</code>과 함께 사용하여 반복 횟수도 테스트의 이름에 표현할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@DisplayName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;반복 테스트&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@RepeatedTest</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> 10<span style="color:#f92672">,</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{displayName}, {currentRepetition}/{totalRepetitions}&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">repeatedTest</span><span style="color:#f92672">(</span>RepetitionInfo repetitionInfo<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;test &#34;</span> <span style="color:#f92672">+</span> repetitionInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">getCurrentRepetition</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> repetitionInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">getTotalRepetitions</span><span style="color:#f92672">());</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>매개변수 기반의 반복 테스트의 경우, <code>@ParameterizedTest</code>와 <code>@ValueSource</code>를 사용할 수 있다.</li>
+<li>이름 뿐만 아니라 현재 <code>@ValueSource</code>의 어떤 인자의 값인지도 네임에 활용하거나 할 수 있다 (<code>{0}</code>: 0번째 인덱스)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@DisplayName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;반복 테스트&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ParameterizedTest</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{index} {displayName} message = `{0}&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ValueSource</span><span style="color:#f92672">(</span>strings <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;날씨가&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;많이&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;추워지고&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;있네요.&#34;</span><span style="color:#f92672">})</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">parameterizedTest</span><span style="color:#f92672">(</span>String message<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>message<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>@ParameterizedTest</code>의 경우 기본적으로는 <code>@ValueSource</code>를 이용해 테스트의 인자를 결정할 수 있다.
+<ul>
+<li>위의 예에서는 문자열만 넘겨주었지만, 다양한 타입의 값들을 넘겨줄 수 있다.</li>
+<li>ValueSource가 아닌 CvsSource, NullSource 등도 존재한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="junit5-테스트-인스턴스">Junit5 테스트 인스턴스</h3>
+<ul>
+<li>Junit은 테스트 메소드마다 인스턴스를 새로 만든다.</li>
+<li>테스트 메소드를 실행하기 위해서는 메소드를 갖는 클래스의 인스턴스를 만들어야 한다.</li>
+<li>JUnit5의 기본 전략은 테스트 메소드<code>마다</code> 클래스의 새로운 인스턴스를 생성한다.</li>
+<li>만약 테스트 코드가 아래와 같이 작성이 되어 있더라도 value의 값은 항상 1로 출력이 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> <span style="color:#75715e">// A shared varaible for each tests
+</span><span style="color:#75715e"></span>    
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">first_test</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>  
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span> <span style="color:#75715e">// 1 출력
+</span><span style="color:#75715e"></span>    value<span style="color:#f92672">++;</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">second_test</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span> <span style="color:#75715e">// 1 출력
+</span><span style="color:#75715e"></span>    value<span style="color:#f92672">++</span> 
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>각각의 테스트 별로 <code>System.out.println(this);</code> 을 실행시키면 현재 해당 메소드를 실행하고 있는 클래스의 인스턴스가 항상 다름을 알 수 있다.</li>
+<li>이렇게 되어 있는 이유? 테스트 간의 의존성을 제거하기 위해서
+<ul>
+<li>테스트 인스턴스를 하나만 쓴다고 가정하면, 공유하는 변수가 많아질 수록 테스트의 순서에 따라 의도하지 않은 동작을 발생시킬 수 있다. (테스트가 불안정해진다)</li>
+<li>테스트의 순서는 예측하지 못한다. 메소드가 위에 있다고 먼저 실행되는 테스트가 아니다. (JUnit5에서는 기본적으로는 그렇지만, 보장할 수는 없다.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>테스트 인스턴스 생성의 전략을 변경할 수 있다.
+<ul>
+<li><code>@TestInstance</code> 애노테이션을 활용한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@TestInstance</span><span style="color:#f92672">(</span>TestInstance<span style="color:#f92672">.</span><span style="color:#a6e22e">Lifecycle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PER_CLASS</span><span style="color:#f92672">)</span> <span style="color:#75715e">// 클래스마다 인스턴스를 하나 생성
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>@BeforeAll, @AfterAll 테스트의 경우는 반드시 <code>non-private / static</code> 메소드여야 한다고 했었는데, 테스트 인스턴스를 클래스 당 하나씩 만들면 <code>static</code>일 필요가 없다.
+<ul>
+<li>왜? 어차피 메소드가 포함된 테스트 클래스의 인스턴스는 하나만 생성되기 때문에, <code>static</code>하게 쓰여야 할 필요가 없다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-테스트-순서">JUnit5 테스트 순서</h2>
+<hr>
+<ul>
+<li>내부적으로 정해진 순서가 존재하기는 한다.
+<ul>
+<li>다만. 이 순서는 JUnit5 내부 구현 로직에 따라 언제든지 바뀔 수 있기 때문에, 의존하는 것은 좋지 않다.</li>
+<li>제대로 작성된 Unit 테스트라면, 다른 테스트와 관계 없이 독립적으로 실행될 수 있어야 한다.</li>
+</ul>
+</li>
+<li>다만 Integration Test / Functional Test / Scenario Test의 경우, 순서가 중요할 수 있다. (Stateful한 상태의 유지가 필요한 경우)
+<ul>
+<li><code>@TestMethodOrder</code>, <code>@Order</code> 애노테이션 사용
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@TestInstance</span><span style="color:#f92672">(</span>TestInstance<span style="color:#f92672">.</span><span style="color:#a6e22e">Lifecycle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PER_CLASS</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@TestMethodOrder</span><span style="color:#f92672">(</span>MethodOrderer<span style="color:#f92672">.</span><span style="color:#a6e22e">OrderAnnotation</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span> 
+  <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> <span style="color:#75715e">// A shared varaible for each tests
+</span><span style="color:#75715e"></span>    
+  <span style="color:#a6e22e">@Order</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">first_test</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>  
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span> <span style="color:#75715e">// 1 출력
+</span><span style="color:#75715e"></span>    value<span style="color:#f92672">++;</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#a6e22e">@Order</span><span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">second_test</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span> <span style="color:#75715e">// 2 출력
+</span><span style="color:#75715e"></span>    value<span style="color:#f92672">++</span> 
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>Spring의 <code>@Order</code> Annotation과 헷갈려서는 안된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-junit-platformproperties">JUnit5: junit-platform.properties</h2>
+<hr>
+<ul>
+<li>
+<p>주로 <code>test/resources</code> 디렉터리 내에 <code>junit-platform.properties</code> 라는 이름의 파일을 생성해서 설정할 수 있다.</p>
+<ul>
+<li>IntelliJ에서 테스트의 리소스 디렉터리로 인식하지 못하는 경우 (클래스패스로 사용하지 않는 경우)?
+<ul>
+<li>Project Structure - Modules - 해당 디렉터리를 테스트의 리소스 디렉터리로 설정해준다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>설정할 수 있는 값의 예시</p>
+<pre><code class="language-properties" data-lang="properties"># junit-platform.properties
+
+# 테스트 인스턴스를 PER_METHOD / PER_CLASS 중 어떤 방식으로 만들지
+junit.jupiter.testintsance.lifecycle.default = per_class 
+# 확장팩 자동 감지 기능을 활성화 할 것인지
+junit.jupiter.extensions.autodetection.enabled = true
+# @Disabled 무시하고 실행할 것인지
+junit.jupiter.conditions.deactivate = org.junit.*.DisabledCondition
+# 테스트의 이름 표기 전략과 관련한 설정
+# 이것을 설정하더라도 @DisplayName의 우선순위가 더 높다
+junit.jupiter.displayname.generator.default = \
+  org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+</code></pre><ul>
+<li>JUnit5의 확장과 관련한 내용은 아래에 설명한다. 확장 기능은 여러 방식으로 등록할 수 있다 (선언적 / Programmable / 자동 감지)
+<ul>
+<li>자동 감지 기능은 기본 값이 <code>false</code></li>
+</ul>
+</li>
+<li>위의 예시 외에도 여러 가지 설정을 할 수 있다. Condition을 기반으로 비활성화 할 수 있는 것으로 보임</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-확장-모델">JUnit5: 확장 모델</h2>
+<hr>
+<ul>
+<li>Ref. <a href="https://junit.org/junit5/docs/current/user-guide/#extensions">https://junit.org/junit5/docs/current/user-guide/#extensions</a></li>
+<li>JUni4의 확장 모델은 <code>@RunWith(Runner)</code>, <code>@TestRule</code>, <code>@MethodRule</code></li>
+<li>JUnit5는 <code>Extension</code> 하나만 사용한다.</li>
+<li>다양한 용도가 있지만, Lifecycle callback을 이용한 Extension을 하나 만들어보자
+<ul>
+<li>실행하는데에 오래 걸리는 테스트를 찾아서 메시지를 출력하자. (Slow 애노테이션을 붙일 수 있도록)</li>
+<li>Extension 클래스 생성</li>
+<li><code>ExtensionContext</code>에는 값을 저장할 수 있는 Store라는 개념이 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FindSlowTestExtension</span> <span style="color:#66d9ef">implements</span> BeforeTestExecutionCallback<span style="color:#f92672">,</span> AfterTestExecutionCallback <span style="color:#f92672">{</span>
+
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> THRESHOLD <span style="color:#f92672">=</span> 1000L<span style="color:#f92672">;</span>
+
+  <span style="color:#a6e22e">@Override</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">beforeTestExecution</span><span style="color:#f92672">(</span>ExtensionContext context<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">final</span> String testClassName <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getRequiredTestClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">final</span> String testMethodName <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getRequiredTestMethod</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+    ExtensionContext<span style="color:#f92672">.</span><span style="color:#a6e22e">Store</span> store <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getStore</span><span style="color:#f92672">(</span>ExtensionContext<span style="color:#f92672">.</span><span style="color:#a6e22e">Namespace</span><span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>testClassName<span style="color:#f92672">,</span> testMethodName<span style="color:#f92672">));</span>
+    store<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;START_TIME&#34;</span><span style="color:#f92672">,</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#a6e22e">@Override</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterTestExecution</span><span style="color:#f92672">(</span>ExtensionContext context<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">final</span> String testClassName <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getRequiredTestClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">final</span> String testMethodName <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getRequiredTestMethod</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+    ExtensionContext<span style="color:#f92672">.</span><span style="color:#a6e22e">Store</span> store <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getStore</span><span style="color:#f92672">(</span>ExtensionContext<span style="color:#f92672">.</span><span style="color:#a6e22e">Namespace</span><span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>testClassName<span style="color:#f92672">,</span> testMethodName<span style="color:#f92672">));</span>
+
+    Method requiredTestMethod <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getRequiredTestMethod</span><span style="color:#f92672">();</span> <span style="color:#75715e">// Java Reflection 개념
+</span><span style="color:#75715e"></span>    SlowTest annotation <span style="color:#f92672">=</span> requiredTestMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">getAnnotation</span><span style="color:#f92672">(</span>SlowTest<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        
+    <span style="color:#66d9ef">long</span> start_time <span style="color:#f92672">=</span> store<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;START_TIME&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">long</span> duration <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">()</span> <span style="color:#f92672">-</span> start_time<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>duration <span style="color:#f92672">&gt;</span> THRESHOLD <span style="color:#f92672">&amp;&amp;</span> annotation <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Please consider marking method [%s] with @SlowTest.\n&#34;</span><span style="color:#f92672">,</span> testMethodName<span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>테스트에 해당하는 ExtensionClass를 선언한다 (선언적 등록 방법)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@ExtendWith</span><span style="color:#f92672">(</span>FindSlowTestExtension<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">required_slow_test</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1005L<span style="color:#f92672">);</span> <span style="color:#75715e">// 이 테스트가 실행될 때, ExtensionClass에 의해 위의 경고 문구가 출력이 된다.
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>Annotation으로 등록하면, <code>FindSlowTestExtension</code> 인스턴스를 만드는 방법에 대한 커스터마이징이 불가능하다.
+<ul>
+<li>테스트마다 Threshold를 바꾸고 싶다고 생각해보자</li>
+<li>Threshold를 인자로 받는 생성자를 추가해주면 될 텐데.. Annotation 기반의 선언적 적용 방법에서는 생성자를 추가해주면 인스턴스를 만들지 못해 에러가 발생한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">NoSuchMethodException: FindSlowTestExtension<span style="color:#f92672">.&lt;</span>init<span style="color:#f92672">&gt;</span>
+</code></pre></div></li>
+<li>테스트 클래스의 <code>static field</code>로 프로그래밍한 임의의 생성자로 Extension 인스턴스를 생성 및 등록하여 사용할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+  <span style="color:#a6e22e">@RegisterExtension</span>
+  <span style="color:#66d9ef">static</span> FindSlowTestExtension findSlowTestExtension <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FindSlowTestExtension<span style="color:#f92672">(</span>2000L<span style="color:#f92672">);</span>
+      
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>의존성에만 추가해놓고, ServiceLoader에 의해 자동으로 감지 및 등록되도록 하는 방법 (기본적으로 설정은 꺼져 있다.)
+<ul>
+<li>Extension을 jar 파일 (의존성)의 형태로 들어 있으면 자동으로 찾아서 활성화 시켜준다. (META-INF)</li>
+<li><code>Automatic Extension Registration</code> 참고</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-마이그레이션">JUnit5 마이그레이션</h2>
+<hr>
+<ul>
+<li>JUnit5가 제공하는 JUnit4 -&gt; 5 Migration</li>
+<li>기본적으로 스프링 부트 프로젝트를 만들면, Vintage 엔진이 빠져있는 상태로 들어온다 (<code>org.junit.vintage:junit-vintage-engine</code>)</li>
+<li>Vintage 엔진이 있어야 JUnit4 기반의 (<code>org.junit.jupiter</code>가 아닌 <code>org.junit</code> 아래에 있는) 기능들을 사용한 테스트 작성 및 실행이 가능하다.</li>
+<li>패키지 기준으로 테스트를 실행하면 Vintage / Jupiter 기반으로 실행되는 각각의 테스트를 확인할 수 있다.
+<ul>
+<li>일부 제약 사항?
+<ul>
+<li>JUnit4에서 사용하던 @Rule이 그냥은 지원되지 않고, junit-jupiter-migrationsupport 모듈을 추가해야 한다.</li>
+<li>스프링 부트가 저 migrationsupport 모듈까지 포함시켜주지는 않는다.</li>
+<li>포함시켜서 <code>@EnableRuleMigrationSupport</code>를 사용하더라도, 아래 타입의 Rule만 제공한다.
+<ul>
+<li>ExternalResource</li>
+<li>Verifier</li>
+<li>ExpectedException</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>직접 Migration 하기 위한 참고표
+<table>
+<thead>
+<tr>
+<th>JUnit4</th>
+<th>JUnit5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Category(Class)</td>
+<td>@Tag(String)</td>
+</tr>
+<tr>
+<td>@RunWith, @Rule, @ClassRule</td>
+<td>@ExtendWith, @RegisterExtension</td>
+</tr>
+<tr>
+<td>@Ignore</td>
+<td>@Disabled</td>
+</tr>
+<tr>
+<td>@Before, @After, @BeforeClass, @AfterClass</td>
+<td>@BeforeEach, @AfterEach, @BeforeAll, @AfterAll</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 id="그-외-junit4와-관련된-정보">그 외 JUnit4와 관련된 정보</h2>
+<hr>
+<ul>
+<li><code>@RunWith</code>는 스프링(부트)을 사용한다면 JUnit5에서는 더 이상 써줄 필요가 없다.
+<ul>
+<li>왜? <code>@SpringBootTest</code>에 <code>@ExtendWith</code>가 이미 붙어 있다.</li>
+<li><code>@RunWith</code>는 메타 애노테이션으로 사용할 수 없었으나, <code>@ExtendWith</code>는 가능해서 <code>@SpringBootTest</code>에 이미 붙여져 있다.</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

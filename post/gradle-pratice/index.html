@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Gradle 기본 구성 파악하기 // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gradle 기본 구성 파악하기"/>
+<meta name="twitter:description" content="Gradle로 기본적인 Java 어플리케이션 빌드 환경 구축   자바 9 이상에서 지원하는 Module을 위한 프로젝트 구성도 Gradle이 지원하지만, 현재 자바 8버전을 쓰고 있으므로 어플리케이션과 라이브러리만 가지고 해보자. Ref  https://docs.gradle.org/current/samples/sample_building_java_applications.html https://docs.gradle.org/current/samples/sample_building_java_libraries.html http://blog.weirdx.io/post/48570   Gradle은 init이라고 하는 built-in task를 가지고 있다. init task는 빈 폴더에서 Gradle 프로젝트를 위한 초기 환경을 구성해준다. init은 마찬가지로 built-in으로 제공되는 wrapper task를 사용해 Gradle wrapper script인 gradlew를 생성한다. 빈 폴더를 생성하고, init 명령어를 실행하면 CLI 기반으로 여러가지 설정을 진행할 수 있다."/>
+
+    <meta property="og:title" content="Gradle 기본 구성 파악하기" />
+<meta property="og:description" content="Gradle로 기본적인 Java 어플리케이션 빌드 환경 구축   자바 9 이상에서 지원하는 Module을 위한 프로젝트 구성도 Gradle이 지원하지만, 현재 자바 8버전을 쓰고 있으므로 어플리케이션과 라이브러리만 가지고 해보자. Ref  https://docs.gradle.org/current/samples/sample_building_java_applications.html https://docs.gradle.org/current/samples/sample_building_java_libraries.html http://blog.weirdx.io/post/48570   Gradle은 init이라고 하는 built-in task를 가지고 있다. init task는 빈 폴더에서 Gradle 프로젝트를 위한 초기 환경을 구성해준다. init은 마찬가지로 built-in으로 제공되는 wrapper task를 사용해 Gradle wrapper script인 gradlew를 생성한다. 빈 폴더를 생성하고, init 명령어를 실행하면 CLI 기반으로 여러가지 설정을 진행할 수 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/gradle-pratice/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-22T03:48:03&#43;09:00" />
+<meta property="article:modified_time" content="2021-01-22T03:48:03&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Gradle 기본 구성 파악하기</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 22, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/gradle/">Gradle</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="gradle로-기본적인-java-어플리케이션-빌드-환경-구축">Gradle로 기본적인 Java 어플리케이션 빌드 환경 구축</h2>
+<hr>
+<ul>
+<li>자바 9 이상에서 지원하는 <code>Module</code>을 위한 프로젝트 구성도 <code>Gradle</code>이 지원하지만, 현재 자바 8버전을 쓰고 있으므로 어플리케이션과 라이브러리만 가지고 해보자.</li>
+<li>Ref
+<ul>
+<li><a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html">https://docs.gradle.org/current/samples/sample_building_java_applications.html</a></li>
+<li><a href="https://docs.gradle.org/current/samples/sample_building_java_libraries.html">https://docs.gradle.org/current/samples/sample_building_java_libraries.html</a></li>
+<li><a href="http://blog.weirdx.io/post/48570">http://blog.weirdx.io/post/48570</a></li>
+</ul>
+</li>
+<li><code>Gradle</code>은 <code>init</code>이라고 하는 built-in <code>task</code>를 가지고 있다. <code>init task</code>는 빈 폴더에서 Gradle 프로젝트를 위한 초기 환경을 구성해준다.</li>
+<li><code>init</code>은 마찬가지로 built-in으로 제공되는 <code>wrapper</code> task를 사용해 Gradle wrapper script인 <code>gradlew</code>를 생성한다.</li>
+<li>빈 폴더를 생성하고, init 명령어를 실행하면 CLI 기반으로 여러가지 설정을 진행할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir demo
+$ cd demo
+$ gradle init
+Picked up _JAVA_OPTIONS: -Dfiles.encoding<span style="color:#f92672">=</span>UTF-8
+
+Select type of project to generate:
+1: basic
+2: application
+3: library
+4: Gradle plugin
+Enter selection <span style="color:#f92672">(</span>default: basic<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>1..4<span style="color:#f92672">]</span> <span style="color:#ae81ff">2</span>
+
+Select implementation language:
+1: C++
+2: Groovy
+3: Java
+4: Kotlin
+5: Scala
+6: Swift
+Enter selection <span style="color:#f92672">(</span>default: Java<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>1..6<span style="color:#f92672">]</span> <span style="color:#ae81ff">3</span>
+
+Split functionality across multiple subprojects?:
+1: no - only one application project
+2: yes - application and library projects
+Enter selection <span style="color:#f92672">(</span>default: no - only one application project<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>1..2<span style="color:#f92672">]</span> <span style="color:#ae81ff">1</span>
+
+Select build script DSL:
+1: Groovy
+2: Kotlin
+Enter selection <span style="color:#f92672">(</span>default: Groovy<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>1..2<span style="color:#f92672">]</span> <span style="color:#ae81ff">2</span>
+
+Select test framework:
+1: JUnit <span style="color:#ae81ff">4</span>
+2: TestNG
+3: Spock
+4: JUnit Jupiter
+Enter selection <span style="color:#f92672">(</span>default: JUnit 4<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>1..4<span style="color:#f92672">]</span> <span style="color:#ae81ff">1</span>
+
+Project name <span style="color:#f92672">(</span>default: demo<span style="color:#f92672">)</span>:
+
+Source package <span style="color:#f92672">(</span>default: demo<span style="color:#f92672">)</span>:
+
+
+&gt; Task :init
+Get more help with your project: https://docs.gradle.org/6.8/samples/sample_building_java_applications.html
+
+BUILD SUCCESSFUL in 1m 6s
+<span style="color:#ae81ff">2</span> actionable tasks: <span style="color:#ae81ff">2</span> executed
+</code></pre></div></li>
+<li><code>init</code> task가 수행되고 나면 프로젝트는 아래와 같은 구조를 갖는다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── gradle <span style="color:#75715e">#1</span>
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew <span style="color:#75715e">#2</span>
+├── gradlew.bat <span style="color:#75715e">#2</span>
+├── settings.gradle.kts  <span style="color:#75715e">#3</span>
+└── app
+    ├── build.gradle.kts <span style="color:#75715e">#4</span>
+    └── src
+        ├── main
+        │   └── java <span style="color:#75715e">#5</span>
+        │       └── demo
+        │           └── App.java
+        └── test
+            └── java <span style="color:#75715e">#6</span>
+                └── demo
+                    └── AppTest.java
+</code></pre></div><ol>
+<li><code>wrapper</code> 파일들을 위해 생성된 폴더</li>
+<li><code>Gradle wrapper</code> 실행 스크립트</li>
+<li>빌드명과 서브프로젝트 등을 정의하기 위한 <code>Settings</code> 파일</li>
+<li><code>app</code> 프로젝트를 위한 <code>Build</code> 스크립트</li>
+<li>기본 자바 소스 폴더</li>
+<li>기본 자바 테스트 소스 폴더</li>
+</ol>
+</li>
+</ul>
+<h3 id="생성된-파일들의-내용-이해">생성된 파일들의 내용 이해</h3>
+<ul>
+<li>
+<p><code>settings.gradle.kts</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * This file was generated by the Gradle &#39;init&#39; task.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * The settings file is used to specify which projects to include in your build.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Detailed information about configuring a multi-project build in Gradle can be found
+</span><span style="color:#75715e"> * in the user manual at https://docs.gradle.org/6.8/userguide/multi_project_builds.html
+</span><span style="color:#75715e"> */</span>
+
+rootProject.name = <span style="color:#e6db74">&#34;demo&#34;</span>
+include(<span style="color:#e6db74">&#34;app&#34;</span>)
+</code></pre></div><ul>
+<li><code>rootProject.name</code>: 빌드 자체에 이름을 부여하며, 프로젝트가 Git 등에서 공유될 가능성을 고려해 폴더의 이름으로 고정해주는 것이 좋다.</li>
+<li><code>include(&quot;app&quot;)</code>: 빌드가 <code>app</code>이라는 하나의 서브프로젝트로 구성되어 있음을 표현하며, <code>app</code>이 실제 코드와 빌드 로직을 가지고 있다는 뜻이다. <code>include</code>를 추가함으로써 여러 개의 서브프로젝트를 포함시킬 수 있다.</li>
+<li>빌드의 대상이 되는 <code>app</code> 서브프로젝트는 그 안에 빌드 스크립트인 <code>build.gradle.kts</code>를 가지고 있다</li>
+</ul>
+</li>
+<li>
+<p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">/*
+</span><span style="color:#75715e">* This file was generated by the Gradle &#39;init&#39; task.
+</span><span style="color:#75715e">*
+</span><span style="color:#75715e">* This generated file contains a sample Java application project to get you started.
+</span><span style="color:#75715e">* For more details take a look at the &#39;Building Java &amp; JVM projects&#39; chapter in the Gradle
+</span><span style="color:#75715e">* User Manual available at https://docs.gradle.org/6.8/userguide/building_java_projects.html
+</span><span style="color:#75715e">*/</span>
+
+plugins {
+    <span style="color:#75715e">// Apply the application plugin to add support for building a CLI application in Java.
+</span><span style="color:#75715e"></span>    application <span style="color:#75715e">// 1
+</span><span style="color:#75715e"></span>}
+
+repositories {
+    <span style="color:#75715e">// Use JCenter for resolving dependencies.
+</span><span style="color:#75715e"></span>    jcenter() <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>}
+
+dependencies {
+    <span style="color:#75715e">// Use JUnit test framework.
+</span><span style="color:#75715e"></span>    testImplementation(<span style="color:#e6db74">&#34;junit:junit:4.13&#34;</span>) <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// This dependency is used by the application.
+</span><span style="color:#75715e"></span>    implementation(<span style="color:#e6db74">&#34;com.google.guava:guava:29.0-jre&#34;</span>) <span style="color:#75715e">// 4
+</span><span style="color:#75715e"></span>}
+
+application {
+    <span style="color:#75715e">// Define the main class for the application.
+</span><span style="color:#75715e"></span>    mainClass.<span style="color:#66d9ef">set</span>(<span style="color:#e6db74">&#34;demo.App&#34;</span>) <span style="color:#75715e">// 5
+</span><span style="color:#75715e"></span>}
+</code></pre></div><ol>
+<li><code>application</code> plugin을 적용하면 Java CLI application에 대한 빌드가 가능하다.</li>
+<li>의존성 해결을 위해 <code>JCenter</code>를 사용한다. (의존성 레포지터리)</li>
+<li>테스트 프레임워크로 <code>JUnit</code>을 사용한다.</li>
+<li>어플리케이션에 의해 요구되는 의존성을 나타낸다.</li>
+<li>어플리케이션의 메인 클래스를 정의한다
+- 자동으로 생성된 메인 클래스인 <code>src/main/java/demo/App.java</code>와 <code>/src/test/java/demo/App.java</code>가 존재한다.</li>
+</ol>
+</li>
+</ul>
+<h3 id="어플리케이션-실행하기">어플리케이션 실행하기</h3>
+<hr>
+<ul>
+<li><code>application</code> 플러그인을 추가하였기 때문에, CLI 기반으로 바로 <code>mainClass</code>의 <code>main</code> 메소드를 실행할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./gradlew run
+Picked up _JAVA_OPTIONS: -Dfiles.encoding<span style="color:#f92672">=</span>UTF-8
+
+&gt; Task :app:run
+Picked up _JAVA_OPTIONS: -Dfiles.encoding<span style="color:#f92672">=</span>UTF-8
+Hello World!
+
+BUILD SUCCESSFUL in 696ms
+<span style="color:#ae81ff">2</span> actionable tasks: <span style="color:#ae81ff">1</span> executed, <span style="color:#ae81ff">1</span> up-to-date
+</code></pre></div></li>
+</ul>
+<h3 id="어플리케이션-빌드하기">어플리케이션 빌드하기</h3>
+<ul>
+<li><code>application</code> 플러그인은 또한 어플리케이션을 필요한 의존성과 함께 빌드 및 아카이빙할 수 있다.</li>
+<li>생성된 파일에는 어플리케이션을 실행할 수 있는 싱글 커맨드 또한 포함된다.</li>
+<li><code>gradlew</code>를 실행하면서 <code>build</code>를 task로 주어 빌드한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./gradlew build
+Picked up _JAVA_OPTIONS: -Dfiles.encoding<span style="color:#f92672">=</span>UTF-8
+Starting a Gradle Daemon, <span style="color:#ae81ff">2</span> incompatible Daemons could not be reused, use --status <span style="color:#66d9ef">for</span> details
+
+&gt; Task :app:test
+Picked up _JAVA_OPTIONS: -Dfiles.encoding<span style="color:#f92672">=</span>UTF-8
+
+BUILD SUCCESSFUL in 14s
+<span style="color:#ae81ff">7</span> actionable tasks: <span style="color:#ae81ff">7</span> executed
+</code></pre></div><ul>
+<li>빌드가 수행되고 나면, <code>app/build/distribution</code> 아래에 <code>app.tar</code>와 <code>app.zip</code>이 생기는걸 확인할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ls -al app/build/distributions
+total <span style="color:#ae81ff">11216</span>
+drwxr-xr-x   <span style="color:#ae81ff">4</span> dwywdo  staff      <span style="color:#ae81ff">128</span> Jan <span style="color:#ae81ff">22</span> 22:00 .
+drwxr-xr-x  <span style="color:#ae81ff">10</span> dwywdo  staff      <span style="color:#ae81ff">320</span> Jan <span style="color:#ae81ff">22</span> 22:00 ..
+-rw-r--r--   <span style="color:#ae81ff">1</span> dwywdo  staff  <span style="color:#ae81ff">3072000</span> Jan <span style="color:#ae81ff">22</span> 22:00 app.tar
+-rw-r--r--   <span style="color:#ae81ff">1</span> dwywdo  staff  <span style="color:#ae81ff">2667039</span> Jan <span style="color:#ae81ff">22</span> 22:00 app.zip
+</code></pre></div></li>
+</ul>
+</li>
+<li>과정을 조금 더 확실하게 보려면 &ndash;scan flag와 함께 빌드해보면 링크가 하나 떨어지는데, 여기서 빌드에 대한 자세한 정보를 확인할 수 있다.</li>
+</ul>
+<h2 id="java-라이브러리를-위한-gradle-사용-시-존재하는-차이점">Java 라이브러리를 위한 Gradle 사용 시 존재하는 차이점</h2>
+<ul>
+<li><code>app</code>이 아닌 <code>lib</code>으로 폴더가 생성되며 (물론 이 폴더 이름은 직접 프로젝트를 구성할 때에는 얼마든지 임의로 설정 가능하다)</li>
+<li><code>build.gradle.kts</code>의 경우
+<ul>
+<li><code>plugins</code> 블록에 <code>application</code>이 아닌 <code>java-library</code>가 적용되어야 한다.</li>
+<li><code>dependencies</code> 블록에 <code>api(&quot;org.apache.commons:commons-math3:3.6.1&quot;)</code>이 생기며, 이는 이 라이브러리를 사용하는 쪽에서 <code>compile classpath</code>에 존재한다는 의미이기도 하다.</li>
+<li>라이브러리이므로 <code>implementation</code> 블록의 경우 외부로 노출되지 않는다. 즉, <code>compile classpath</code>에 없다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="java-라이브러리를-jar로-생성">Java 라이브러리를 JAR로 생성</h3>
+<ul>
+<li><code>./gradlew build</code>를 사용하여 JAR 파일로 생성한다.
+<ul>
+<li>처음 gradlew를 실행하게 되면, 필요한 gradle 버전이 다운로드되어 <code>~/.gradle.wrapper.dists</code>에 생겨야 하기 때문에 조금 느릴 수 있다.</li>
+<li>첫 빌드 시에 <code>Gradle</code>은 요구되는 의존성이 ~/.gradle 디렉터리 아래의 캐시에 존재하는지 확인한 후, 필요한 라이브러리가 있다면 다운로드 받아 저장하게 된다.</li>
+<li><code>build</code> task는 클래스를 컴파일하고, 테스트를 실행하며, 테스트 report 또한 생성한다.
+<ul>
+<li>테스트 report의 경우 <code>lib/build/reports/tests/test/index.html</code>에 존재한다.</li>
+</ul>
+</li>
+<li>생성된 JAR 파일은 <code>lib/build/libs</code>에 존재한다.</li>
+</ul>
+</li>
+<li>생성된 JAR의 유효성을 확인하고 싶다면 아래의 명령어를 통해 MANIFEST.MF파일과 Library.class(파일 명에 따라 다를 수 있음)가 있는지 확인한다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ jar tf lib/build/libs/lib.jar
+META-INF/
+META-INF/MANIFEST.MF
+lib/
+lib/Library.class
+</code></pre></div><ul>
+<li><code>java-library</code> 플러그인은 기본적으로 프로젝트 소스코드들이 <a href="https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_project_layout">conventional project layout</a>를 기반으로 존재한다고 가정한다. 이 프로젝트 레이아웃은 커스터마이징 또한 가능하다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="jar-파일이-라이브러리의-버전도-포함하는-이름을-갖도록-설정하기">JAR 파일이 라이브러리의 버전도 포함하는 이름을 갖도록 설정하기</h3>
+<ul>
+<li><code>build.gradle.kts</code>에 <code>version</code>을 명시해주면 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">version = <span style="color:#e6db74">&#34;0.1.0&#34;</span>
+</code></pre></div><ul>
+<li>버전 외에도 <code>name</code>과 <code>group</code>을 설정할 수 있다.
+<ul>
+<li><code>name</code>의 경우 서브프로젝트의 폴더 이름에서 가져오게 되며 여기서는 <code>lib</code>이다. 폴더 명을 바꾸고 <code>include</code> statement에서 그에 맞춰 변경해줄 수 있다.</li>
+<li><code>group</code>의 경우 라이브러리가 퍼블리쉬될 때 사용되며, 마찬가지로 group = &ldquo;sample-group&quot;과 같이 설정해줄 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="manifest-파일-커스터마이징">MANIFEST 파일 커스터마이징</h3>
+<ul>
+<li>빌드 시 기본적으로 MANIFEST.MF가 없더라도 생성해주게 되는데, <code>build.gradle.kts</code>에 <code>jar</code> task에 대해 추가 설정을 함으로써 MANIFEST.MF 파일에 들어갈 내용을 지정할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">tasks.jar {
+    manifest {
+        attributes(mapOf(<span style="color:#e6db74">&#34;Implementation-Title&#34;</span> to project.name,
+                         <span style="color:#e6db74">&#34;Implementation-Version&#34;</span> to project.version))
+    }
+}
+</code></pre></div></li>
+</ul>
+<h3 id="sources-jar-추가로-생성하기">Sources JAR 추가로 생성하기</h3>
+<ul>
+<li><code>build.gradle.kts</code>에 아래 설정을 해줌으로써, <code>Sources JAR</code>를 추가로 빌드 시 생성할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">java {
+    withSourcesJar()
+}
+</code></pre></div></li>
+</ul>
+<h3 id="api-documentation-추가하기">API Documentation 추가하기</h3>
+<ul>
+<li><code>java-library</code> 플러그인은 기본적으로 <code>javadoc</code> task를 통해 라이브러리에 대한 문서화를 수행할 수 있다.</li>
+<li>소스코드 내의 <code>/</code>로 이루어진 주석을 <code>/* */</code>로 감싸주면 <code>javadoc</code> 마크업으로 인식되고, javadoc task로 생성할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./gradlew javadoc
+</code></pre></div><ul>
+<li>생성된 <code>javadoc</code>은 <code>lib/build/docs/javadoc/index.html</code>에 위치한다.</li>
+<li>Javadoc JAR도 별도로 생성할 수 있으며, 위의 <code>java { }</code> 블록에 <code>withJavadocJar()</code>를 추가해주면 된다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="gradle-wrapper-기본-명령어">Gradle Wrapper 기본 명령어</h2>
+<hr>
+<ul>
+<li><code>./gradlew tasks</code>: 현재 프로젝트를 기준으로 플러그인에 의해서든, 기본이든 가용한 task를 전부 보여준다.</li>
+<li><code>./gradlew build</code>: 빌드 및 테스트 진행</li>
+<li><code>./gradlew run</code>: 프로젝트 실행(메인)</li>
+<li><code>./gradlew clean</code>: 빌드 디렉터리 삭제</li>
+<li><code>./gradlew jar</code>: 메인 클래스를 포함하는 jar archive 생성</li>
+<li><code>./gradlew dependencyInsight</code>: 루트 프로젝트에 정의된 의존성들을 조금 더 구체적으로 보여줌</li>
+<li><code>./gradlew dependencies</code>: 루트 프로젝트의 의존성 확인</li>
+<li><code>./gradlew proejcts</code>: 루트 프로젝트의 모든 서브프로젝트 확인</li>
+<li><code>./gradlew properties</code>: 프로젝트의 모든 속성 확인</li>
+<li><code>./gradlew checks / test</code>: checks / test 수행</li>
+</ul>
+<h3 id="추가-키워드-및-참고-링크">추가 키워드 및 참고 링크</h3>
+<ul>
+<li><code>buildSrc</code>
+<ul>
+<li><a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources">https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources</a></li>
+</ul>
+</li>
+<li><code>Dependency Management</code>
+<ul>
+<li><a href="https://docs.gradle.org/current/userguide/core_dependency_management.html">https://docs.gradle.org/current/userguide/core_dependency_management.html</a></li>
+<li><a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:what-are-dependency-configurations">https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:what-are-dependency-configurations</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

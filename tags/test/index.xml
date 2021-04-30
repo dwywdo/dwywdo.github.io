@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on DWYWDO</title>
+    <link>https://dwywdo.github.io/tags/test/</link>
+    <description>Recent content in Test on DWYWDO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Apr 2021 10:48:36 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mockito 란 무엇인가</title>
+      <link>https://dwywdo.github.io/post/what-is-mockito/</link>
+      <pubDate>Sun, 25 Apr 2021 10:48:36 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/what-is-mockito/</guid>
+      <description>Mockito?   Mock: 진짜 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체 Mockito: Mock 객체를 쉽게 만들고 관리하고 검증할 수 있는 방법을 제공한다. (Mock을 지원하는 Framework)  Github link: https://github.com/mockito/mockito 테스트를 작성하는 자바 개발자의 50% 이상이 사용하는 Mock 프레임워크 2021년 4월 기준으로 현재 v3.9.7까지 릴리즈되었다.   애플리케이션이 복잡해지면서, 외부 API를 호출하거나 DB에 접근한다고 가정하면, 외부 API를 항상 테스트 중에 사용하기가 힘들다. 이러한 것들을 (DB로 치면 DAO / Repository 객체) Mock으로 만들어놓고, Mockito로 가정되는 행위를 정의해 놓을 수 있다.</description>
+    </item>
+    
+    <item>
+      <title>Junit - 1</title>
+      <link>https://dwywdo.github.io/post/junit-1/</link>
+      <pubDate>Sun, 21 Mar 2021 03:54:36 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/junit-1/</guid>
+      <description>JUnit?   자바 개발자가 가장 많이 사용하는 테스팅 프레임워크  이 외에도 Mockito, TestNG, Spock 등이 있다.   JUnit5는 2017년 10월에 공개가 되었다.  Spring Boot가 2.2로 버전업하면서, 기본 JUnit의 버전을 5로 올렸다.   JUnit4와의 차이점?  JUnit4는 하나의 Jar Dependency로 들어오고, JUnit이 참조하는 다른 라이브러리들이 존재하는 형태 JUnit5는 그 자체로 여러 모듈로 구성되어 있음  JUnit Platform 위에 Jupiter / Vintage를 올릴 수 있는 형태 Platform: JUnit으로 작성한 테스트를 실행하는 런쳐를 제공  Console에서도 실행할 수 있고, 자바 메소드 내에서도 실행 가능 IntelliJ 등에서도 JUnit으로 작성된 코드를 실행하는 것이 가능 (JUnit Platform을 사용해서 @Test Annotation이 붙은 메소드의 실행이 가능하다.</description>
+    </item>
+    
+    <item>
+      <title>Junit - 2</title>
+      <link>https://dwywdo.github.io/post/junit-2/</link>
+      <pubDate>Sun, 21 Mar 2021 03:54:36 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/junit-2/</guid>
+      <description>Custom Tag   JUnit5가 제공하는 애노테이션들은 Meta Annotation이기 때문에, Composed Annotation을 만들어서 사용할 수 있다. 커스텀한 애노테이션을 만들 때, 그 위에 저 Meta Annotation을 사용할 수 있다는 의미이다. 커스텀 애노테이션 선언 @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다. @Test // Jupiter가 제공하는 애노테이션 @Tag(&amp;#34;fast&amp;#34;) public @interface FastTest { } @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다.</description>
+    </item>
+    
+  </channel>
+</rss>

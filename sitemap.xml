@@ -3,9 +3,50 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dwywdo.github.io/categories/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/categories/development/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
   </url><url>
     <loc>https://dwywdo.github.io/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/java/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/what-is-mockito/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
   </url><url>
     <loc>https://dwywdo.github.io/tags/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/test/</loc>
+    <lastmod>2021-04-25T10:48:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/junit-1/</loc>
+    <lastmod>2021-03-21T03:54:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/junit-2/</loc>
+    <lastmod>2021-03-21T03:54:36+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/gradle/</loc>
+    <lastmod>2021-01-22T03:48:03+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/gradle-pratice/</loc>
+    <lastmod>2021-01-22T03:48:03+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/what-is-gradle/</loc>
+    <lastmod>2021-01-21T03:48:03+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/jvm/</loc>
+    <lastmod>2021-01-19T01:07:50+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/what-is-jvm-and-how-to-execute-java/</loc>
+    <lastmod>2021-01-19T01:07:50+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/java-data-types/</loc>
   </url>
 </urlset>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>DWYWDO</title>
-    <link>https://dwywdo.github.io/</link>
-    <description>Recent content on DWYWDO</description>
+    <title>Posts on DWYWDO</title>
+    <link>https://dwywdo.github.io/post/</link>
+    <description>Recent content in Posts on DWYWDO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Apr 2021 10:48:36 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Apr 2021 10:48:36 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mockito 란 무엇인가</title>
       <link>https://dwywdo.github.io/post/what-is-mockito/</link>

@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>자바 데이터 타입, 변수, Conversion, 그리고 Casting // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="자바 데이터 타입, 변수, Conversion, 그리고 Casting"/>
+<meta name="twitter:description" content="자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0."/>
+
+    <meta property="og:title" content="자바 데이터 타입, 변수, Conversion, 그리고 Casting" />
+<meta property="og:description" content="자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/java-data-types/" /><meta property="article:section" content="post" />
+
+
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">자바 데이터 타입, 변수, Conversion, 그리고 Casting</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          12 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/java/">Java</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="자바의-프리미티브primitive-타입-종류와-값의-범위-그리고-기본-값">자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값</h2>
+<hr>
+<ul>
+<li>자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 <code>Primitive Types</code> 이라고 부른다.</li>
+<li><code>Primitive type</code>은 <code>Boolean</code>, <code>Character</code>, 4개의 <code>Integer</code>, 2개의 <code>Floating-point</code> 타입으로 구성되어 있다.</li>
+<li><code>Integer</code> 타입과 <code>Floating-point</code> 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Contains</th>
+<th>Default</th>
+<th>Size</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>true or false</td>
+<td>false</td>
+<td>1 bit</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Signed integer</td>
+<td>0</td>
+<td>8 bits</td>
+<td>-128 to 127</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Signed integer</td>
+<td>0</td>
+<td>16 bits</td>
+<td>-32768 to 32767</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Signed integer</td>
+<td>0</td>
+<td>32 bits</td>
+<td>-2147483648 to 2147483647</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Signed integer</td>
+<td>0</td>
+<td>63 bits</td>
+<td>-9223372036854775808 to 9223372036854775807</td>
+</tr>
+<tr>
+<td>float</td>
+<td>IEEE 754 floating point</td>
+<td>0.0</td>
+<td>32 bits</td>
+<td>1.4E-45 to 3.4028235E+38</td>
+</tr>
+<tr>
+<td>double</td>
+<td>IEEE 754 floating point</td>
+<td>0.0</td>
+<td>64 bits</td>
+<td>4.9E-324 to 1.7976931348623157E+308</td>
+</tr>
+</tbody>
+</table>
+<h2 id="프리미티브-타입primitive-type-vs-레퍼런스-타입reference-type">프리미티브 타입(Primitive type) vs 레퍼런스 타입(Reference type)</h2>
+<hr>
+<ul>
+<li>자바에서 제공하는 <code>Reference type</code>은 5가지가 있으며, 그 종류는 아래와 같다
+<ul>
+<li>Classes</li>
+<li>Arrays</li>
+<li>Interfaces</li>
+<li>Enums</li>
+<li>Annotations</li>
+</ul>
+</li>
+<li>각각의 레퍼런스 타입에서는 별도로 다루는 것으로 하고, <code>Primitive type</code>과 어떤 차이가 있는지 확인해보자 (아래부터 <code>Reference type</code>의 인스턴스는 <code>Object</code>로 기술한다.)
+<ul>
+<li><code>Primitve type</code>은 자바 언어에 의해서 정의된 것으로, 프로그래머는 새로운 <code>Primitive type</code>을 정의할 수 없다. 반면 <code>Reference type</code>은 사용자에 의해서 정의될 수 있으며, 그 종류에는 제한이 없다. 예를 들어, <code>Reference type</code> 중 하나인 <code>Class</code>의 하나로 <code>Point</code>라는 클래스를 생성하고 그 인스턴스를 이용할 수 있다.</li>
+<li><code>Primitive type</code>은 단일 값을 나타낸다. 반면 <code>Reference type</code>은 복수 개의 <code>Primitive type</code>을 포함하는 <code>Aggregated type</code>이 될 수 있다. 예를 들어 위에서 정의한 <code>Point</code> Class의 경우 2차원 상에서 x, y 좌표를 표현하는 두 개의 <code>double</code> type을 가질 수 있다. 이런 측면에서 <code>char[]</code>나 <code>Point[]</code>와 같은 <code>Array</code> 또한 <code>Reference type</code>임을 알 수 있다.</li>
+<li><code>Primitve type</code>은 0~8바이트까지의 메모리를 사용한다. <code>Primitve type</code>의 변수가 변수에 저장되거나 메소드에 전달될 때, 컴퓨터는 같은 값을 갖는 바이트를 복사해서 사용한다. 반면 <code>Object</code>는 메모리가 복사되는 것이 아닌, 원본 메모리에 대한 참조 값을 복사하여 사용한다. 또한 <code>Object</code>는 필요한 메모리에 따라 동적으로 힙에 저장된 뒤, 그 <code>Object</code>가 필요 없게 되면 <code>Garbage Collection</code>에 의해 메모리에서 자동으로 해제된다.</li>
+<li>C/C++에서와 달리, 자바에서의 <code>Reference type</code>은 integer로부터 변환될 수 없으며 값 자체가 증가/감소될 수 없다 (메모리 주소에 대한 직접적인 연산이 불가능). 같은 맥락으로 주소 참조에 사용되는 operator인 <code>&amp;</code>, <code>*</code>, <code>-&gt;</code> 등도 없다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="object-조작과-reference-copies">Object 조작과 Reference Copies</h4>
+<hr>
+<ul>
+<li>아래의 코드는 <code>a primitive int</code> value의 값을 변경한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 42<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x<span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>변수 y는 변수 x의 값과 동일한 값을(복사된 값)을 가지게 된다. <code>VM</code> 상에서 두 개의 독립적인 32-bit integer 42가 존재하게 된다.</li>
+</ul>
+</li>
+<li>같은 로직을 <code>Reference type</code> Point를 이용해보자.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Point p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Point<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">,</span> 2<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">);</span>
+Point q <span style="color:#f92672">=</span> p<span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>위의 코드가 실행되고 나면, 변수 q는 변수 p와 동일한 참조 값(복사된 값)을 가지게 된다. 실제로 Point <code>Object</code>는 <code>VM</code> 상에서 하나만 존재하지만, 해당 <code>Object</code>에 대한 2개의 참조 copies가 존재하게 되는 것이다(p &amp; q).</li>
+<li>p와 q모두 Point <code>Object</code>의 값을 변경할 수 있다.</li>
+<li><code>Arrays</code>의 경우도 동일하게 생각할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> greetr <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;h&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;e&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;l&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;l&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;o&#39;</span><span style="color:#f92672">};</span>
+<span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> cuss <span style="color:#f92672">=</span> greet<span style="color:#f92672">;</span> <span style="color:#75715e">// cuss holds the same reference
+</span><span style="color:#75715e"></span>cuss<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;!&#39;</span><span style="color:#f92672">;</span> <span style="color:#75715e">// Use reference to change an element
+</span><span style="color:#75715e"></span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>greet<span style="color:#f92672">);</span> <span style="color:#75715e">// Prints &#34;Hell!&#34;
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>메소드에 매개변수로 전달될 때에도 유사한 차이가 존재한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">changePrimitive</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>x <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>x<span style="color:#f92672">--);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>위의 메소드가 <code>invoke</code>되면, 메소드의 입장에서는 매개변수 x를 이용해 전달되는 변수의 복사본을 사용하게 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">changeReference</span><span style="color:#f92672">(</span>Point p<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>q<span style="color:#f92672">.</span><span style="color:#a6e22e">x</span><span style="color:#f92672">--);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>위의 메소드가 <code>invoke</code>되면, 메소드의 입장에서는 매개변수 p를 이용해 참조 값의 복사본을 사용하게 된다.
+<ul>
+<li>실제 <code>Object</code>를 가리키는 참조 값을 사용하기 때문에, 메소드 내부에서 외부의 Point <code>Object</code>의 값(<code>q.x</code>)를 변경할 수 있게 된다. <strong>하지만 p의 참조 값 자체를 변경할 수는 없다.</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="comparing-objects">Comparing Objects</h4>
+<hr>
+<ul>
+<li><code>Reference type</code>은 값의 동일 여부를 비교하는 데에도 <code>Primitive type</code>과 다른 점이 있다.</li>
+<li><code>Primitive type</code>의 값을 비교할 때에는, equality operator(<code>==</code>)를 사용한다. (값을 구성하는 모든 비트가 동일한지 비교)</li>
+<li><code>Reference type</code>의 값을 비교할 때에 <code>==</code>를 사용하게 되면 참조 값을 비교하게 된다. (같은 <code>Object</code>를 가리키는지 비교)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String letter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;o&#34;</span><span style="color:#f92672">;</span>
+String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">;</span>
+String t <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hell&#34;</span> <span style="color:#f92672">+</span> letter<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>s <span style="color:#f92672">==</span> t<span style="color:#f92672">)</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;equal&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">// They have same content, but they&#39;re not equal.
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> a <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>1<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 3<span style="color:#f92672">};</span>
+<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> b <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[])</span> a<span style="color:#f92672">.</span><span style="color:#a6e22e">clone</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>a <span style="color:#f92672">==</span> b<span style="color:#f92672">)</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;equal&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">// They&#39;re not equal.
+</span></code></pre></div></li>
+<li><code>Reference</code> 측면에서 다른 두 <code>String</code>의 내용을 비교하고자 한다면, 메소드 <code>String.equals(String s)</code>를 사용한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String letter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;o&#34;</span><span style="color:#f92672">;</span>
+String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">;</span> <span style="color:#75715e">// These two string objects
+</span><span style="color:#75715e"></span>String t <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hell&#34;</span> <span style="color:#f92672">+</span> letter<span style="color:#f92672">;</span> <span style="color:#75715e">// contain exactly the same text
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>t<span style="color:#f92672">))</span> <span style="color:#f92672">{</span> <span style="color:#75715e">// And the equals() method
+</span><span style="color:#75715e"></span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;equal&#34;</span><span style="color:#f92672">);</span> <span style="color:#75715e">// tells us so
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>모든 <code>object</code>는 <code>equals()</code> 메소드를 상속받는다. (가장 상위 클래스인 <code>Object</code>로부터)</li>
+<li>동일성을 판단하는 비교 기준을 별도로 구현하고 싶다면 <code>equals()</code> 메소드를 오버라이딩하여 구현하면 된다.</li>
+<li><code>String</code> class는 이미 그에 맞게 구현되어 있기 때문에 별도로 구현하지 않고도 사용이 가능한 것이다.</li>
+<li>만약 <code>Array</code>에 대해서 <code>equals()</code>를 호출하게 되면, <code>==</code>을 사용하는 것과 동일하다.
+<ul>
+<li>그럼 어떻게 배열의 내용을 비교하나? <code>java.util.Arrays.equals()</code>를 사용한다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="boxing--unboxing-conversions">Boxing &amp; Unboxing Conversions</h4>
+<hr>
+<ul>
+<li><code>Primitive type</code>의 값들을 <code>object</code>처럼 다루고 싶을 때가 있을 수 있다. 자바에서는 이러한 목적을 위해 <code>Wrapper classes</code>를 제공하며, 각 <code>Primitive type</code>에 대응되는 클래스들이 있다.
+<ul>
+<li><code>Boolean</code></li>
+<li><code>Byte</code></li>
+<li><code>Short</code></li>
+<li><code>Character</code></li>
+<li><code>Integer</code></li>
+<li><code>Long</code></li>
+<li><code>Float</code></li>
+<li><code>Double</code></li>
+</ul>
+</li>
+<li>위의 클래스들은 <code>Immutable</code>, <code>final</code> 클래스이며 단일 primitive value를 가질 수 있다.</li>
+<li>주로 이런 <code>Wrapper</code> 클래스들은 <code>java.util.List</code> 등의 Collection에 primitive value를 담고자 할 때 사용한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> arrayList<span style="color:#f92672">&lt;&gt;();</span>
+numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(-</span>1<span style="color:#f92672">));</span>
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">intValue</span><span style="color:#f92672">();</span>
+</code></pre></div></li>
+<li>자바는 <code>Boxing / Unboxing Conversion</code>을 통해 위와 같은 변환을 가능하게 한다.</li>
+<li><code>Boxing</code>: <code>Primitive value</code> -&gt; <code>Wrapper Object</code></li>
+<li><code>Unboxing</code>: <code>Wrapper Object</code> -&gt; <code>Primitive value</code></li>
+<li>별도의 타입캐스팅이 필요 없이, <code>Authboxing/unboxing</code>이 이루어진다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Integer i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> <span style="color:#75715e">// int literal 0 boxed to an Integer object
+</span><span style="color:#75715e"></span>Number n <span style="color:#f92672">=</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">;</span> <span style="color:#75715e">// float literal boxed to Float and widened to Number
+</span><span style="color:#75715e"></span>Integer i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> <span style="color:#75715e">// this is a boxing conversion
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i<span style="color:#f92672">;</span> <span style="color:#75715e">// i is unboxed here
+</span><span style="color:#75715e"></span>i<span style="color:#f92672">++;</span> <span style="color:#75715e">// i is unboxed, incremented, and then boxed up again
+</span><span style="color:#75715e"></span>Integer k <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span>2<span style="color:#f92672">;</span> <span style="color:#75715e">// i is unboxed and the sum is boxed up again
+</span><span style="color:#75715e"></span>i <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+j <span style="color:#f92672">=</span> i<span style="color:#f92672">;</span> <span style="color:#75715e">// unboxing here throws a NPE(NullPointerException)
+</span></code></pre></div></li>
+<li><code>Autoboxing</code>은 Collection을 더 쉽게 다룰 수 있게 해준다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(-</span>1<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+</code></pre></div></li>
+</ul>
+<h2 id="리터럴-literal">리터럴 (Literal)</h2>
+<hr>
+<blockquote>
+<p>Literal are sequences of source characters that diretly represent constant value that appear as-is in Java source code.
+&ndash; Evans, B., &amp; Flanagan, D. (2018). Java in a Nutshell. Van Duuren Media.</p>
+</blockquote>
+<ul>
+<li>특정 문자들로 구성된 문자열이며, 그 자체로 상수 값을 소스 코드 내에서 표현한다.
+<ul>
+<li>정수 값</li>
+<li>소수 값</li>
+<li>single quote로 감싸진 단일 문자</li>
+<li>double quote로 감싸진 string</li>
+<li>예약어인 true / false / null</li>
+</ul>
+</li>
+</ul>
+<h2 id="변수-선언-및-초기화하는-방법">변수 선언 및 초기화하는 방법</h2>
+<hr>
+<ul>
+<li><code>Type</code> <code>변수의 이름</code> = <code>초기값</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 선언
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> counter<span style="color:#f92672">;</span>
+String s<span style="color:#f92672">;</span>
+<span style="color:#75715e">// 선언 및 초기화
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+String s <span style="color:#f92672">=</span> readLine<span style="color:#f92672">();</span>
+<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> data <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>x<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span> x<span style="color:#f92672">+</span>2<span style="color:#f92672">,</span> x<span style="color:#f92672">+</span>3<span style="color:#f92672">};</span> <span style="color:#75715e">// 배열 초기화
+</span></code></pre></div></li>
+<li>자바 10에서 도입된 <code>var</code>를 사용하는 경우, 우항의 값에 따라서 자동적으로 타입은 추론된다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> <span style="color:#75715e">// type of i inferred as int
+</span><span style="color:#75715e"></span>var s <span style="color:#f92672">=</span> readLine<span style="color:#f92672">();</span> <span style="color:#75715e">// type of s inferred as String
+</span></code></pre></div></li>
+</ul>
+<h2 id="변수의-스코프와-라이프타임">변수의 스코프와 라이프타임</h2>
+<hr>
+<ul>
+<li>
+<p>다른 언어에도 있는 개념이지만, 자바에서 선언되는 모든 변수는 <code>Scope</code>를 가지게 된다.</p>
+</li>
+<li>
+<p><code>Scope</code>는 특정 변수가 유효하게 접근되고 사용될 수 있는 프로그램의 어느 부분이라고 할 수 있다.</p>
+</li>
+<li>
+<p>자바에서의 <code>Scope</code>의 종류에는 다음과 같은 것들이 있다.</p>
+<ul>
+<li>Class Scope: 클래스의 <code>{}</code> 안, 클래스 내 메소드의 밖에서 <code>private</code> access modifier와 함께 선언된 변수들은 <code>Class Scope</code>를 가진다. 이 변수들은 클래스 내의 어디에서도 사용될 수 있지만, 클래스 밖에서는 사용할 수 없다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassScopeExample</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> Integer amount <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exampleMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    amount<span style="color:#f92672">++;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">anotherExampleMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    Integer anotherAmount <span style="color:#f92672">=</span> amount <span style="color:#f92672">+</span> 4<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li><code>private</code> access modifier를 주지 않으면, 모든 패키지에서 해당 변수에 접근이 가능해진다. (<a href="https://www.baeldung.com/java-access-modifiers">Reference for Access Modifier in Java</a>)</li>
+</ul>
+</li>
+<li>Method Scope: 메소드 내부에서 선언된 변수들은 <code>Method Scope</code>를 가지며, 동일한 메소드 내부에서만 접근이 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MethodScopeExample</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodA</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    Integer area <span style="color:#f92672">=</span> 2<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodB</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    area <span style="color:#f92672">=</span> area <span style="color:#f92672">+</span> 2<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// compile error (cannot be resolved to a variable)
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>Loop Scope: Loop (반복문) 내에서 선언된 변수들은 <code>Loop Scope</code>를 가지며, 해당 Loop 내에서만 접근이 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoopScopeExample</span> <span style="color:#f92672">{</span>
+List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> listOfNames <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Joe&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Susan&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Pattrick&#34;</span><span style="color:#f92672">);</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">iterationOfNames</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      String allNames <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>String name <span style="color:#f92672">:</span> listOfNames<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+          allNames <span style="color:#f92672">=</span> allNames <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> name<span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span>
+      String lastNameUsed <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+      <span style="color:#75715e">// compile error (cannot be resolved to a variable)
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>Bracket Scope: <code>{}</code>를 별도로 선언하여 추가적인 Scope를 정의할 수 있다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BracketScopeExample</span> <span style="color:#f92672">{</span>    
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mathOperationExample</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      Integer sum <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+      <span style="color:#f92672">{</span>
+          Integer number <span style="color:#f92672">=</span> 2<span style="color:#f92672">;</span>
+          sum <span style="color:#f92672">=</span> sum <span style="color:#f92672">+</span> number<span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span>
+      <span style="color:#75715e">// compiler error, number cannot be solved as a variable
+</span><span style="color:#75715e"></span>      number<span style="color:#f92672">++;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>변수의 라이프타임은 기본적으로 Scope에 의존한다고 볼 수 있다.</p>
+<ul>
+<li>클래스로부터 생성된 인스턴스에 존재하는 변수(<code>static</code> access modifier 없이 선언된 변수)는 instance variable이라고 불리며, 인스턴스 생성으로부터 인스턴스가 할당된 메모리가 JVM에 의해 해제되는 순간까지가 Lifetime이다.
+<ul>
+<li>JVM에 의해 해제되는 순간은 해당 인스턴스 그 자체의 Scope에 또 의존한다.</li>
+</ul>
+</li>
+<li>클래스에서 <code>static</code>과 함께 선언된 변수는 class variable이라고 불리며, 프로그램의 시작부터 종료까지가 lifetime이다.</li>
+<li>위의 두 가지 경우가 아니게 선언된 변수는 모두 local varaible이라고 볼 수 있으며, 프로그램의 제어가 해당 인스턴스가 선언된 블록(<code>{}</code>)을 벗어나게 되면 lifetime이 끝나게 된다.</li>
+</ul>
+</li>
+<li>
+<p>읽어보니 결국 주의할 점은 <code>lifetime</code>과 <code>scope</code>는 비슷하면서도 다른 개념이라는 것. <code>lifetime</code>의 경우는 말 그대로 해당 변수가 메모리를 할당받는 시점부터 끝날 때까지를 의미하는 것이고, <code>scope</code>의 경우는 그 변수의 <code>lifetime</code> 내에서 어디서 접근할 수 있는지를 의미한다고 정리해볼 수 있을 것 같다.</p>
+<ul>
+<li>예를 들어 Static 키워드를 사용해 선언된 <code>Class variable</code>의 경우에 <code>lifetime</code>은 프로그램 시작-종료까지이지만, <code>private</code>이 함께 지정되면 그 <code>lifetime</code> 내에서 해당 변수에 접근할 수 있는 범위는 클래스 내부로 제한되는 것. <code>private</code>이 없이 선언되면 어디서든 접근할 수 있게 된다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="스코프와-variable-shadowing">스코프와 Variable Shadowing</h3>
+<hr>
+<ul>
+<li>클래스 내에서 <code>Class scope</code>을 갖는 변수를 하나 선언하고, 그 클래스의 내부 메소드에서 동일한 이름으로 변수를 선언하면 어떻게 될까?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NestedScopesExample</span> <span style="color:#f92672">{</span>
+  String title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Baeldung&#34;</span><span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printTitle</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>title<span style="color:#f92672">);</span> <span style="color:#75715e">// Print &#34;Baeldung&#34;
+</span><span style="color:#75715e"></span>      String title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;John Doe&#34;</span><span style="color:#f92672">;</span>
+      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>title<span style="color:#f92672">);</span> <span style="color:#75715e">// Print &#34;John Doe&#34;
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+<h3 id="타입-변환-캐스팅-그리고-타입-프로모션">타입 변환, 캐스팅 그리고 타입 프로모션</h3>
+<hr>
+<ul>
+<li>자바의 특별한 Operator 중, <code>Type Conversion or Casting</code>에 쓰이는 것이 <code>()</code>이다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> 28 <span style="color:#75715e">// An integer literal cast to a byte type
+</span><span style="color:#75715e"></span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">+</span> 3<span style="color:#f92672">.</span><span style="color:#a6e22e">14f</span><span style="color:#f92672">)</span> <span style="color:#75715e">// a floating-point sum value cast to an integer
+</span><span style="color:#75715e"></span><span style="color:#f92672">(</span>String<span style="color:#f92672">)</span>h<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>k<span style="color:#f92672">)</span> <span style="color:#75715e">// A generic object to a String
+</span></code></pre></div></li>
+<li>이 주제와 관련하여서는 <code>Primtivie type</code>과 <code>Reference type</code>을 분리하여서 보자.</li>
+</ul>
+<h4 id="primitive-types-type-conversion"><code>Primitive types</code> (<code>Type Conversion</code>)</h4>
+<hr>
+<ul>
+<li>위에서 보았듯이, <code>primitive type</code>로 선언된 변수 각각은 구성하는 비트의 수. 즉 메모리의 크기가 다르다.</li>
+<li>보다 더 큰 범위를 갖는 타입 혹은 작은 범위를 갖는 타입으로 바꾸어 저장하는 것이 가능하고, 이를 <code>Type Conversion</code>이라 한다.</li>
+<li>보다 큰 범위로 <code>Conversion</code>할 때에는(<code>Widening</code>), 별도의 Notation이 코드 상에서 필요 없다. 남는 비트 공간의 경우 0으로 설정된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> myInt <span style="color:#f92672">=</span> 127<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">long</span> myLong <span style="color:#f92672">=</span> myInt<span style="color:#f92672">;</span> <span style="color:#75715e">// int -&gt; long conversion
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">float</span> myFloat <span style="color:#f92672">=</span> myLong<span style="color:#f92672">;</span> <span style="color:#75715e">// 정수 그룹 -&gt; 소수 그룹
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> myDouble <span style="color:#f92672">=</span> myLong<span style="color:#f92672">;</span> <span style="color:#75715e">// 정수 그룹 -&gt; 소수 그룹
+</span></code></pre></div></li>
+<li>보다 작은 범위로 <code>Conversion</code>할 때에는(<code>Narrowing</code>), Conversion 대상의 값에 따라서 데이터가 손실될 수 있다. 이 경우에는 <code>()</code>, 즉 Casting을 명시적으로 해주어서 데이터 손실이 일어날 수 있는 상황임을 표현해야 한다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> myInt <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span> myDouble<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">byte</span> myByte <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> myInt<span style="color:#f92672">;</span>
+</code></pre></div></li>
+<li>특수한 경우: Both of <code>Widening</code> and <code>Narrowing</code>
+<ul>
+<li>byte -&gt; char로의 Conversion 케이스</li>
+<li>byte -&gt; int (Widening)</li>
+<li>int -&gt; char (Narrowing)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">byte</span> myLargeValueByte <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> 130<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b10000010 (-126)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> myLargeValueChar <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">)</span> myLargeValueByte<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b11111111 10000010 (unsigned value)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> myLargeValueInt <span style="color:#f92672">=</span> myLargeValueChar<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b11111111 10000010 (65410)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">byte</span> myOtherByte <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> myLargeValueInt<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b10000010 (-126)
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">char</span> myLargeValueChar2 <span style="color:#f92672">=</span> 130<span style="color:#f92672">;</span> <span style="color:#75715e">// This is an int not a byte! 0b 00000000 10000010 unsigned value
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> myLargeValueInt2 <span style="color:#f92672">=</span> myLargeValueChar2<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b00000000 100000010 (130)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">byte</span> myOtherByte2 <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> myLargeValueInt2<span style="color:#f92672">;</span> <span style="color:#75715e">// 0b10000010 (-126)
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>위에서 소개한 <code>Boxing</code> / <code>Unboxing</code>의 경우도 Conversion의 한 종류에 해당한다.</li>
+<li><code>String Conversions</code>
+<ul>
+<li>모든 <code>Primitive types</code>은 <code>toString()</code>을 이용해 <code>String</code>으로 변환할 수 있다. Overriding해서 커스텀하게 구현하는 것도 가능하다.</li>
+<li>이렇게 변환된 <code>String</code>을 다시 <code>Primitive type</code>으로 변경하고자 한다면, <code>parse[Type]</code> 메소드를 이용하면 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">byte</span>  myNewByte   <span style="color:#f92672">=</span> Byte<span style="color:#f92672">.</span><span style="color:#a6e22e">parseByte</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">short</span> myNewShort  <span style="color:#f92672">=</span> Short<span style="color:#f92672">.</span><span style="color:#a6e22e">parseShort</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">int</span>   myNewInt    <span style="color:#f92672">=</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">parseInt</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">long</span>  myNewLong   <span style="color:#f92672">=</span> Long<span style="color:#f92672">.</span><span style="color:#a6e22e">parseLong</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+
+<span style="color:#66d9ef">float</span>  myNewFloat  <span style="color:#f92672">=</span> Float<span style="color:#f92672">.</span><span style="color:#a6e22e">parseFloat</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">double</span> myNewDouble <span style="color:#f92672">=</span> Double<span style="color:#f92672">.</span><span style="color:#a6e22e">parseDouble</span><span style="color:#f92672">(</span>myString<span style="color:#f92672">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Numeric Promotion
+<ul>
+<li>Binary operation을 수행할 때에, 각 피연산자는 데이터 크기 측면에서 아래의 규칙에 따라 Promotion 된다.</li>
+<li>두 피연산자 중 하나가 double이면, 다른 것은 double로 Promotion 된다.</li>
+<li>두 피연산자 중 하나가 float이면, 다른 것은 float로 Promotion 된다.</li>
+<li>두 피연산자 중 하나가 long이면, 다른 것은 long로 Promotion 된다.</li>
+<li>모든 경우가 아니면, 둘 다 int로 간주된다</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">byte</span> op1 <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">byte</span> op2 <span style="color:#f92672">=</span> 5<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">byte</span> myResultingByte <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span> <span style="color:#f92672">(</span>op1 <span style="color:#f92672">+</span> op2<span style="color:#f92672">);</span>
+<span style="color:#75715e">// op1, op2 모두 int로 Promotion된 후, 다시 byte로 캐스팅된다.
+</span></code></pre></div></li>
+</ul>
+<h4 id="reference-types-type-casting"><code>Reference types</code> (<code>Type Casting</code>)</h4>
+<hr>
+<ul>
+<li><code>Reference type casting</code>이 <code>Primitive type conversion</code>과 다른 점?
+<ul>
+<li><code>Primitive type conversion</code>의 경우 데이터가 손실되는 경우 그 손실은 비가역적이다.</li>
+<li><code>Reference type</code>의 경우, 참조하고 있는 <code>object</code> 자체의 내용은 변경하지 않고, 단지 바라보는 방식만을 바꾸는 것이다.
+<ul>
+<li><code>Upcasting</code> / <code>Downcasting</code>이라고 부른다</li>
+</ul>
+</li>
+<li><code>Upcasting</code>: <code>object</code>에서 가용한 메소드와 속성을 <strong>축소한다</strong>
+<ul>
+<li>상속과 밀접하게 연관이 되어 있으며, 주로 보다 구체적인 타입을 참조하기 위해 사용한다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> Animal <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">meow</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+Cat cat <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Cat<span style="color:#f92672">();</span>
+Animal animal <span style="color:#f92672">=</span> cat<span style="color:#f92672">;</span> <span style="color:#75715e">// Implicit upcasting
+</span><span style="color:#75715e"></span>animal <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Animal<span style="color:#f92672">)</span> cat<span style="color:#f92672">;</span> <span style="color:#75715e">// Explicit upcasting. 
+</span><span style="color:#75715e">// Explicit upcasting을 굳이 해줄 필요는 없다. 레퍼런스는 선언된 타입의 어떤 하위타입도 참조할 수 있기 때문에!
+</span></code></pre></div></li>
+<li><code>cat object</code>는 그대로 존재함에도 불구하고, <code>animal</code>을 이용해 meow()를 호출하면 Compile error가 발생한다.</li>
+<li><code>Upcasting</code>의 장점? Polymorphism의 이점을 취할 수 있다. 다른 <code>Dog</code> class를 정의해보자.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">extends</span> Animal <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>모든 <code>cat</code>과 <code>dog</code>을 <code>animal</code>로 취급하는 <code>feed()</code> 메소드를 선언할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnimalFedder</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">feed</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">&gt;</span> animals<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    animals<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>animal <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+      animal<span style="color:#f92672">.</span><span style="color:#a6e22e">eat</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">})</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li><code>AnimalFeeder</code>는 정확히 리스트 내의 동물이 어떤 동물인지 알 필요가 없다! Implicit upcasting은 List를 구성할 때 발생한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">List<span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">&gt;</span> animals <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+animals<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Cat<span style="color:#f92672">());</span>
+animals<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Dog<span style="color:#f92672">());</span>
+<span style="color:#66d9ef">new</span> AnimalFeeder<span style="color:#f92672">().</span><span style="color:#a6e22e">feed</span><span style="color:#f92672">(</span>animals<span style="color:#f92672">);</span>
+</code></pre></div></li>
+<li>각 <code>Cat</code>, <code>Dog</code> 클래스에서 <code>eat()</code>을 <code>Overriding</code>하면 먹는 방식을 다르게 구현하고, 일관된 방식으로 호출할 수 있다.</li>
+<li>참고로, 모든 자바의 <code>object</code>는 <code>Object</code> 클래스를 상속하기 때문에, 아래와 같은 Upcasting도 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Object object <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal<span style="color:#f92672">();</span>
+</code></pre></div><ul>
+<li>모든 자바의 <code>object</code>가 <code>toString()</code>을 가지고 있는 이유이기도 하다.</li>
+</ul>
+</li>
+<li><code>Interface</code>로 Upcasting하는 것도 흔한 케이스이다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Mew</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">meow</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> Animal <span style="color:#66d9ef">implements</span> Mew <span style="color:#f92672">{</span>  
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// ... 
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">meow</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// ... 
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>이제 어떤 <code>Cat object</code>는 <code>Mew</code>로 Upcasting할 수 있다.
+<pre><code>Mew mew = new Cat();
+</code></pre></li>
+<li><code>Cat</code>은 <code>Mew</code>이고, Implicit Upcasting이 일어난다.</li>
+<li>최종적으로 <code>Cat object</code>은 <code>Animal</code>, <code>Object</code>, <code>Mew</code>, <code>Cat</code> 타입의 Reference variable에 할당이 가능해진다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Downcasting</code>: <code>object</code>에서 가용한 메소드와 속성을 <strong>확장한다</strong>
+<ul>
+<li>만약 <code>Animal</code> 타입을 <code>Cat</code> 클래스에만 존재하는 메소드(<code>meow()</code>)를 호출하기 위해 사용하고 싶으면 어떻게 해야 할까?</li>
+<li><code>Superclass -&gt; Subclass</code>로의 Casting</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Animal animal <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Cat<span style="color:#f92672">();</span>
+<span style="color:#f92672">((</span>Cat<span style="color:#f92672">)</span> animal<span style="color:#f92672">).</span><span style="color:#a6e22e">meow</span><span style="color:#f92672">();</span>
+</code></pre></div><ul>
+<li>명시적으로(Explicitly) Casting을 해주어야 한다! (Upcasting과의 차이점)</li>
+<li>만약 <code>animal</code>에 할당된 대상이 <code>Dog</code>이거나, <code>meow()</code>를 가지고 있지 않은 클래스라면 없는 메소드에 접근하게 되므로 문제가 될 수 있다.</li>
+<li>이를 사전에 확인하기 위해, <code>instanceOf</code> operator를 사용해야 한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>animal instanceOf Cat<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  <span style="color:#f92672">((</span>Cat<span style="color:#f92672">)</span> animal<span style="color:#f92672">).</span><span style="color:#a6e22e">meow</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>만약 위의 <code>instanceOf</code>를 사용하지 않고 Downcasting을 하게 되면, 실제 Dog object를 캐스팅하려고 할 때 런타임 에러(<code>ClassCastException</code>)이 발생하게 된다.</li>
+<li>아예 관계없는 타입(상속 관계가 없는)으로 Downcasting하게 되면 컴파일 에러가 발생한다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Animal animal<span style="color:#f92672">;</span>
+String s <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>String<span style="color:#f92672">)</span> animal<span style="color:#f92672">;</span> <span style="color:#75715e">// Cannot cast from Animal to String
+</span></code></pre></div></li>
+</ul>
+</li>
+<li><code>cast()</code> 메소드
+<ul>
+<li>클래스를 캐스팅하기 위한 별도의 메소드가 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">whenDowncastToCatWithCastMethod_thenMeowIsCalled</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  Animal animal <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Cat<span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Cat<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isInstance</span><span style="color:#f92672">(</span>animal<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+    Cat cat <span style="color:#f92672">=</span> Cat<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cast</span><span style="color:#f92672">(</span>animal<span style="color:#f92672">);</span>
+    cat<span style="color:#f92672">.</span><span style="color:#a6e22e">meow</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>주로 <code>Generic</code> 타입과 함께 사용된다. <code>Dog</code> 혹은 <code>Cat</code> 중 한 가지 타입에 대해서만 AnimalFeeder를 정의해보자.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnimalFeederGeneric</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> type<span style="color:#f92672">;</span>
+
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">AnimalFeederGeneric</span><span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">type</span> <span style="color:#f92672">=</span> type<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">feed</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">&gt;</span> animals<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      List<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;();</span>
+      animals<span style="color:#f92672">.</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">(</span>animal <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>type<span style="color:#f92672">.</span><span style="color:#a6e22e">isInstance</span><span style="color:#f92672">(</span>animal<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+              T objAsType <span style="color:#f92672">=</span> type<span style="color:#f92672">.</span><span style="color:#a6e22e">cast</span><span style="color:#f92672">(</span>animal<span style="color:#f92672">);</span>
+              list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>objAsType<span style="color:#f92672">);</span>
+          <span style="color:#f92672">}</span>
+      <span style="color:#f92672">});</span>
+      <span style="color:#66d9ef">return</span> list<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span> 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">whenParameterCat_thenOnlyCatsFed</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    List<span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">&gt;</span> animals <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+    animals<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Cat<span style="color:#f92672">());</span>
+    animals<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Dog<span style="color:#f92672">());</span>
+    AnimalFeederGeneric<span style="color:#f92672">&lt;</span>Cat<span style="color:#f92672">&gt;</span> catFeeder
+      <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnimalFeederGeneric<span style="color:#f92672">&lt;</span>Cat<span style="color:#f92672">&gt;(</span>Cat<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+    <span style="color:#75715e">// 생성자를 통해서 어떤 동물에게만 먹이를 줄 것인지 결정하게 할 수 있다.
+</span><span style="color:#75715e"></span>    List<span style="color:#f92672">&lt;</span>Cat<span style="color:#f92672">&gt;</span> fedAnimals <span style="color:#f92672">=</span> catFeeder<span style="color:#f92672">.</span><span style="color:#a6e22e">feed</span><span style="color:#f92672">(</span>animals<span style="color:#f92672">);</span>
+
+    assertTrue<span style="color:#f92672">(</span>fedAnimals<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> 1<span style="color:#f92672">);</span>
+    assertTrue<span style="color:#f92672">(</span>fedAnimals<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>0<span style="color:#f92672">)</span> <span style="color:#66d9ef">instanceof</span> Cat<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="추가-키워드-및-참고-링크">추가 키워드 및 참고 링크</h3>
+<hr>
+<ul>
+<li><a href="https://www.baeldung.com/java-variable-scope">https://www.baeldung.com/java-variable-scope</a></li>
+<li><a href="https://www.baeldung.com/java-primitive-conversions">https://www.baeldung.com/java-primitive-conversions</a></li>
+<li><a href="https://www.baeldung.com/java-type-casting">https://www.baeldung.com/java-type-casting</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Mockito 란 무엇인가 // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mockito 란 무엇인가"/>
+<meta name="twitter:description" content="Mockito?   Mock: 진짜 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체 Mockito: Mock 객체를 쉽게 만들고 관리하고 검증할 수 있는 방법을 제공한다. (Mock을 지원하는 Framework)  Github link: https://github.com/mockito/mockito 테스트를 작성하는 자바 개발자의 50% 이상이 사용하는 Mock 프레임워크 2021년 4월 기준으로 현재 v3.9.7까지 릴리즈되었다.   애플리케이션이 복잡해지면서, 외부 API를 호출하거나 DB에 접근한다고 가정하면, 외부 API를 항상 테스트 중에 사용하기가 힘들다. 이러한 것들을 (DB로 치면 DAO / Repository 객체) Mock으로 만들어놓고, Mockito로 가정되는 행위를 정의해 놓을 수 있다."/>
+
+    <meta property="og:title" content="Mockito 란 무엇인가" />
+<meta property="og:description" content="Mockito?   Mock: 진짜 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체 Mockito: Mock 객체를 쉽게 만들고 관리하고 검증할 수 있는 방법을 제공한다. (Mock을 지원하는 Framework)  Github link: https://github.com/mockito/mockito 테스트를 작성하는 자바 개발자의 50% 이상이 사용하는 Mock 프레임워크 2021년 4월 기준으로 현재 v3.9.7까지 릴리즈되었다.   애플리케이션이 복잡해지면서, 외부 API를 호출하거나 DB에 접근한다고 가정하면, 외부 API를 항상 테스트 중에 사용하기가 힘들다. 이러한 것들을 (DB로 치면 DAO / Repository 객체) Mock으로 만들어놓고, Mockito로 가정되는 행위를 정의해 놓을 수 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/what-is-mockito/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-25T10:48:36&#43;09:00" />
+<meta property="article:modified_time" content="2021-04-25T10:48:36&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Mockito 란 무엇인가</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 25, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/java/">Java</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/test/">Test</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="mockito">Mockito?</h2>
+<hr>
+<ul>
+<li><code>Mock</code>: 진짜 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체</li>
+<li><code>Mockito</code>: Mock 객체를 쉽게 만들고 관리하고 검증할 수 있는 방법을 제공한다. (Mock을 지원하는 Framework)
+<ul>
+<li>Github link: <a href="https://github.com/mockito/mockito">https://github.com/mockito/mockito</a></li>
+<li>테스트를 작성하는 자바 개발자의 50% 이상이 사용하는 Mock 프레임워크</li>
+<li>2021년 4월 기준으로 현재 v3.9.7까지 릴리즈되었다.</li>
+</ul>
+</li>
+<li>애플리케이션이 복잡해지면서, 외부 API를 호출하거나 DB에 접근한다고 가정하면, 외부 API를 항상 테스트 중에 사용하기가 힘들다. 이러한 것들을 (DB로 치면 <code>DAO</code> / <code>Repository</code> 객체) <code>Mock</code>으로 만들어놓고, <code>Mockito</code>로 가정되는 행위를 정의해 놓을 수 있다.</li>
+<li>임의의 가짜 객체이기 때문에, 실제 외부 서비스 / DB 등이 없이도 (구현이 안되어 있어도) 테스트에 사용할 수 있다.</li>
+<li><code>Mockito</code>와 <code>Unit 테스트</code>?
+<ul>
+<li><code>Unit 테스트</code>: <a href="https://martinfowler.com/bliki/UnitTest.html">https://martinfowler.com/bliki/UnitTest.html</a>
+<ul>
+<li>주로 Unit 테스트는 객체나 클래스 하나의 단위로 Strict하게 단위를 정의하기도 하지만, 이렇게 하는 경우 모든 의존성에 대해서 Mocking을 해야 단위 테스트라고 생각할 수도 있다. (모든 의존성이 끊어져야 한다)</li>
+<li>하지만 반드시 Unit 테스트가 그래야만 한다고 보기는 힘들 수 있다.</li>
+<li>Unit(단위): 클래스나 객체가 아닌, 행동의 단위라고 볼 수 있고, 행동과 연관된 모든 객체들은 함께 테스트가 되어도 괜찮다는 관점도 있다.</li>
+<li>어느 범위까지만 Mock을 정의할 것인가?는 고민해볼 만한 대목
+<ul>
+<li>외부 서비스는 Mocking을 하고, 이미 구현이 된 클래스는 Mocking 할 필요가 없을 수도..?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="mockito-시작하기">Mockito 시작하기</h3>
+<hr>
+<ul>
+<li>Ref. <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html</a></li>
+<li><code>Spring Boot</code> 기반의 프로젝트에서는, <code>spring-boot-starter-test</code>를 따라서 <code>Mockito</code>가 알아서 의존성에 포함이 된다.</li>
+<li><code>Spring Boot</code> 없이 진행하고자 한다면, JUnit5와 Mockito를 연동해주는 <code>mockito-junit-jupiter</code> 와 <code>mockito-core</code>를 의존성에 추가해주어야 한다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle"><span style="color:#75715e">// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+</span><span style="color:#75715e"></span>testImplementation group: <span style="color:#e6db74">&#39;org.mockito&#39;</span><span style="color:#f92672">,</span> name: <span style="color:#e6db74">&#39;mockito-junit-jupiter&#39;</span><span style="color:#f92672">,</span> version: <span style="color:#e6db74">&#39;3.9.3&#39;</span>
+<span style="color:#75715e">// https://mvnrepository.com/artifact/org.mockito/mockito-core
+</span><span style="color:#75715e"></span>testImplementation group: <span style="color:#e6db74">&#39;org.mockito&#39;</span><span style="color:#f92672">,</span> name: <span style="color:#e6db74">&#39;mockito-core&#39;</span><span style="color:#f92672">,</span> version: <span style="color:#e6db74">&#39;3.9.3&#39;</span>
+</code></pre></div></li>
+<li><code>Mockito</code>를 사용하기 위해 알아야 할 것?
+<ul>
+<li><code>Mock</code>을 만드는 방법</li>
+<li><code>Mock</code>이 어떻게 동작해야 하는지 관리하는 방법</li>
+<li><code>Mock</code>의 행동을 검증하는 방법</li>
+</ul>
+</li>
+</ul>
+<h3 id="mock-객체-만들기">Mock 객체 만들기</h3>
+<hr>
+<ul>
+<li>
+<p>일단 아래와 같은 서비스가 있다고 가정해보자</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyService</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> MemberService memberService<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> StudyRepository repository<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">StudyService</span><span style="color:#f92672">(</span>MemberService memberService<span style="color:#f92672">,</span> StudyRepository studyRepository<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">assert</span> memberService <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 이 객체가 존재해야 한다.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">assert</span> repository  <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 이 객체가 존재해야 한다.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">memberService</span> <span style="color:#f92672">=</span> memberService<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> repository<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> Study <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">(</span>Long memberId<span style="color:#f92672">,</span> Study study<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#f92672">&lt;</span>Optional<span style="color:#f92672">&gt;</span>Member member <span style="color:#f92672">=</span> memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>memberId<span style="color:#f92672">);</span>
+        study<span style="color:#f92672">.</span><span style="color:#a6e22e">setOwner</span><span style="color:#f92672">(</span>member<span style="color:#f92672">.</span><span style="color:#a6e22e">orElseThrow</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Member doesn&#39;t exist for id &#34;</span> <span style="color:#f92672">+</span> memberId<span style="color:#f92672">)));</span>
+        <span style="color:#66d9ef">return</span> repository<span style="color:#f92672">.</span><span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>
+<p><code>createNewStudy</code>가 하는 일에 대한 테스트 코드를 작성해보고 싶은데..</p>
+<ul>
+<li><code>MemberService</code> / <code>StudyRepository</code>가 없다면? (인터페이스만 있고 구현은 되어 있지 않다고 가정해보자)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyServiceTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createStudyService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 생성자에 무엇을 넣어주어야 하나..? 인터페이스만 있고 구현체가 없는데..?
+</span><span style="color:#75715e"></span>        StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">();</span> <span style="color:#75715e">// ?
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyServiceTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createStudyService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 이렇게 테스트에서 사용할 임의의 객체를 직접 테스트 내에서 구현해서 쓸 것인가..?
+</span><span style="color:#75715e"></span>        MemberService memberService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MemberService<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">public</span> Optional<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>Long memberId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">empty</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> <span style="color:#f92672">);</span> <span style="color:#75715e">// ?
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li><code>Mockito</code>가 이런 작업을 편리하게 해주는 것</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyServiceTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createStudyService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        StudyRepository studyRepository <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>StudyRepository<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// Static import로 하는 경우
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// StudyRepository studyRepository = mock(StudyRepository.class);
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// 이제 생성자의 사용이 가능해졌다.
+</span><span style="color:#75715e"></span>        StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> studyRepository<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>더 코드를 줄이는 방법? <code>@Mock</code> 애노테이션 사용. 단, 애노테이션만 붙인다고 <code>Mock 객체</code>가 생성되는 것은 아니다..! Extension 등록이 필요하다 (여러 테스트에서 <code>Mock 객체</code>를 쓰는 경우 유용하다)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@ExtendWith</span><span style="color:#f92672">(</span>MockitoExtension<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyServiceTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Mock</span>
+    MemberService memberService<span style="color:#f92672">;</span>
+    <span style="color:#a6e22e">@Mock</span>
+    StudyRepository studyRepository<span style="color:#f92672">;</span>
+
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createStudyService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> studyRepository<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>테스트 메소드에 파라미터로 정의하면서 넣어주면 하나의 테스트에서만 쓸 때도 목 객체를 편하게 생성할 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@ExtendWith</span><span style="color:#f92672">(</span>MockitoExtension<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudyServiceTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createStudyService</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Mock</span> MemberService memberService<span style="color:#f92672">,</span> <span style="color:#a6e22e">@Mock</span> StudyRepository studyRepository<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> studyRepository<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="mock-객체-stubbing">Mock 객체 Stubbing</h3>
+<hr>
+<ul>
+<li><code>Stubbing</code>: Mock 객체의 행동을 조작하는 것</li>
+<li>Mock 객체는 가짜 행위이기 때문에 Mock 객체의 행동을 직접 가정해주어야 한다.</li>
+<li>모든 Mock 객체의 기본 행동?
+<ul>
+<li><code>리턴 값이 있는 메소드</code>의 경우 <code>null</code>을 리턴한다. (<code>Optional</code>의 경우 <code>Optional.empty()</code>)</li>
+<li><code>Primitive 타입의 멤버 변수</code> 등은 모두 <code>기본 값</code>을 갖는다.</li>
+<li><code>Collection</code>은 <code>비어있는 Collection</code>을 갖는다.</li>
+<li><code>Void를 리턴하는 메소드</code>는 예외를 던지지 않고 아무런 일도 발생하지 않는다.</li>
+</ul>
+</li>
+<li>memberService.findById(Long memberId); 메소드를 <code>Mock 객체</code>에 대고 그냥 실행하면 <code>null</code>을 반환한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Optional<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> optional <span style="color:#f92672">=</span> memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">);</span>
+</code></pre></div></li>
+<li>행위를 변경하려면?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Member member <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Member<span style="color:#f92672">();</span>
+member<span style="color:#f92672">.</span><span style="color:#a6e22e">setId</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">);</span>
+member<span style="color:#f92672">.</span><span style="color:#a6e22e">setEmail</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dwywdo@gmail.com&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// memberService.findById(1L); Stubbing 하지 않으면 Optional.empty() 반환. Mock 객체이기 때문에
+</span><span style="color:#75715e">// 매개변수 1이 들어갈 때의 행위 지정
+</span><span style="color:#75715e"></span>when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">)).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">));</span>
+</code></pre></div></li>
+<li>매개변수에는 <code>ArgumentMatcher</code>를 이용해 보다 유연하게 행위를 지정할 수 있다.
+<ul>
+<li>Ref. <a href="https://javadoc.io/static/org.mockito/mockito-core/3.3.3/org/mockito/ArgumentMatchers.html">https://javadoc.io/static/org.mockito/mockito-core/3.3.3/org/mockito/ArgumentMatchers.html</a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>any<span style="color:#f92672">())).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">));</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>예외를 던지게 할 수도 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// thenThrow 사용
+</span><span style="color:#75715e"></span>when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">)).</span><span style="color:#a6e22e">thenThrow</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">());</span>
+<span style="color:#75715e">// doThrow 사용
+</span><span style="color:#75715e"></span>doThrow<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">()).</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>memberService<span style="color:#f92672">).</span><span style="color:#a6e22e">validate</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// assertion
+</span><span style="color:#75715e"></span>assertThrows<span style="color:#f92672">(</span>IllegalArgumentException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+    memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">validate</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">);</span>
+<span style="color:#f92672">})</span>
+</code></pre></div></li>
+<li>메소드가 동일한 매개변수로 여러번 호출될 때 Chaining하게 정의하여 각기 다르게 행동되도록 조작할 수도 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>any<span style="color:#f92672">())).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">))</span> <span style="color:#75715e">// 1번째
+</span><span style="color:#75715e"></span>                                   <span style="color:#f92672">.</span><span style="color:#a6e22e">thenThrow</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">())</span> <span style="color:#75715e">// 2번째
+</span><span style="color:#75715e"></span>                                   <span style="color:#f92672">.</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">empty</span><span style="color:#f92672">())</span> <span style="color:#75715e">// 3번째
+</span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="mock-객체에-대한-확인-verification">Mock 객체에 대한 확인 (Verification)</h3>
+<hr>
+<ul>
+<li>테스트 내에서 <code>Mock 객체</code>가 어떻게 사용되었는지를 검증할 수 있다. 가령, 아래의 내용을 가정해보자.
+<ul>
+<li>MemberService에 <code>notify()</code>라는 알림 메소드가 있다.</li>
+<li><code>notify()</code> 메소드는 StudyService에서 <code>createNewStudy()</code>가 호출될 때, Study 생성 후 한번 호출된다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+     StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> studyRepository<span style="color:#f92672">);</span>
+     Study study <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>10<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;테스트 스터디&#34;</span><span style="color:#f92672">);</span>
+     studyService<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">,</span> study<span style="color:#f92672">);</span>
+
+     verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+     <span style="color:#75715e">// ArgumentMatcher 또한 사용이 가능
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">// verify(memberService, times(1)).notify(any());
+</span><span style="color:#75715e"></span>
+     <span style="color:#75715e">// 테스트 중의 Mock 객체 내의 validate() 메소드 호출을 원하지 않으면
+</span><span style="color:#75715e"></span>     verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> never<span style="color:#f92672">()).</span><span style="color:#a6e22e">validate</span><span style="color:#f92672">(</span>any<span style="color:#f92672">());</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>만약 <code>createNewStudy()</code>에서 <code>notify()</code> 메소드가 실행되지 않았다면, 아래와 같이 에러 메시지가 나타나면서 테스트가 실패한다.
+<pre><code>Wanted but not invoked:
+memberService(notify(
+    me.dwywdo.testproject.domain.Study@5ef323a
+))
+-&gt; at me.dwywdo.testproject.study.StudyServiceTest.createNewStudy(StudyServiceTest.java:48)
+</code></pre></li>
+<li>Method invocation의 순서도 중요하다면? 만약 <code>notify(a)</code> -&gt; <code>notify(b)</code> 순서로 호출이 되어야 함을 테스트하고 싶다면?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>a<span style="color:#f92672">);</span>
+    verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>b<span style="color:#f92672">);</span>
+    <span style="color:#75715e">// 순서 지정
+</span><span style="color:#75715e"></span>    InOrder inOrder <span style="color:#f92672">=</span> inOrder<span style="color:#f92672">(</span>memberService<span style="color:#f92672">);</span>
+    inOrder<span style="color:#f92672">.</span><span style="color:#a6e22e">verify</span><span style="color:#f92672">(</span>memberService<span style="color:#f92672">).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>a<span style="color:#f92672">);</span>
+    inOrder<span style="color:#f92672">.</span><span style="color:#a6e22e">verify</span><span style="color:#f92672">(</span>memberService<span style="color:#f92672">).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>b<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>특정 행위 이후 아무 액션이 발생해서는 안된다면?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    verifyNoMoreInteractions<span style="color:#f92672">(</span>memberService<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>특정 시간 이내에 호출이 되었는지를 지정해야 한다면?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> timeout<span style="color:#f92672">(</span>100<span style="color:#f92672">).</span><span style="color:#a6e22e">times</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>a<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="bdd-style-mockito">BDD Style Mockito</h3>
+<hr>
+<ul>
+<li><code>BDD</code>: <code>Behavior Driven Development</code>. 애플리케이션이 어떻게 행동해야 하는지 공통된 이해를 구성하는 방법으로, <code>TDD</code>에서 창안했다.</li>
+<li>행동에 대한 스펙
+<ul>
+<li>Title: 제목</li>
+<li>Narrative (As a / I want / so that): 스펙과 관련된 설명</li>
+<li>Acceptance criteria
+<ul>
+<li><code>Given</code> / <code>When</code> / <code>Then</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>위에서 작성했던 예제 코드 또한 <code>Given</code> / <code>When</code> / <code>Then</code>의 관점으로 나누어서 볼 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// Given
+</span><span style="color:#75715e"></span>    StudyService studyService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StudyService<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> studyRepository<span style="color:#f92672">);</span>
+    assertNotNull<span style="color:#f92672">(</span>studyService<span style="color:#f92672">);</span>
+
+    Member member <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Member<span style="color:#f92672">();</span>
+    member<span style="color:#f92672">.</span><span style="color:#a6e22e">setId</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">);</span>
+    member<span style="color:#f92672">.</span><span style="color:#a6e22e">setEmail</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dwywdo@gmail.com&#34;</span><span style="color:#f92672">);</span>
+      
+    Study study <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>10<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;테스트 스터디&#34;</span><span style="color:#f92672">);</span>
+
+    when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">)).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">));</span>
+    when<span style="color:#f92672">(</span>studyRepository<span style="color:#f92672">.</span><span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>study<span style="color:#f92672">)).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+
+    <span style="color:#75715e">// When
+</span><span style="color:#75715e"></span>    studyService<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewStudy</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">,</span> study<span style="color:#f92672">);</span>
+
+    <span style="color:#75715e">// Then
+</span><span style="color:#75715e"></span>    assertEquals<span style="color:#f92672">(</span>member<span style="color:#f92672">,</span> study<span style="color:#f92672">.</span><span style="color:#a6e22e">getOwner</span><span style="color:#f92672">());</span>
+    verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+    verifyNoMoreInteractions<span style="color:#f92672">(</span>memberService<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>이것이 BDD의 전부는 아니지만.. 일단은 <code>Mockito</code>를 한정해서 어떻게 BDD 기반의 테스트를 위한 API가 제공되는지를 보자.
+<ul>
+<li><code>JBehave</code>와 같은 프레임워크도 별도로 있으나, <code>Mockito</code>에서도 지원한다. (<code>BDDMockito</code> 클래스)</li>
+<li>위의 코드에서 <code>when()</code>으로 stubbing을 하는 부분은 given에 해당하는데 API의 이름이 when이라 잘 어울리지 않는다. 대신 <code>given()</code>을 사용할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">when<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">)).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">));</span>
+<span style="color:#75715e">// BDD API 이용하면,
+</span><span style="color:#75715e"></span>given<span style="color:#f92672">(</span>memberService<span style="color:#f92672">.</span><span style="color:#a6e22e">findById</span><span style="color:#f92672">(</span>1L<span style="color:#f92672">)).</span><span style="color:#a6e22e">willReturn</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>member<span style="color:#f92672">));</span>
+</code></pre></div></li>
+<li><code>verify()</code>도 아래와 같이 바꿀 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">verify<span style="color:#f92672">(</span>memberService<span style="color:#f92672">,</span> times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+verifyNoMoreInteractions<span style="color:#f92672">(</span>memberService<span style="color:#f92672">);</span>
+<span style="color:#75715e">// BDD API 이용하면,
+</span><span style="color:#75715e"></span>then<span style="color:#f92672">(</span>memberService<span style="color:#f92672">).</span><span style="color:#a6e22e">should</span><span style="color:#f92672">(</span>times<span style="color:#f92672">(</span>1<span style="color:#f92672">)).</span><span style="color:#a6e22e">notify</span><span style="color:#f92672">(</span>study<span style="color:#f92672">);</span>
+then<span style="color:#f92672">(</span>memberService<span style="color:#f92672">).</span><span style="color:#a6e22e">shouldHaveNoMoreInteractions</span><span style="color:#f92672">();</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>보통 BDD Style에서는 테스트 이름 또한 어느 정도 정해진 형식을 따르지만, <code>@DisplayName</code>에 적어두는 것도 좋은 방법</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

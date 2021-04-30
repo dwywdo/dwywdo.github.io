@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Junit - 1 // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Junit - 1"/>
+<meta name="twitter:description" content="JUnit?   자바 개발자가 가장 많이 사용하는 테스팅 프레임워크  이 외에도 Mockito, TestNG, Spock 등이 있다.   JUnit5는 2017년 10월에 공개가 되었다.  Spring Boot가 2.2로 버전업하면서, 기본 JUnit의 버전을 5로 올렸다.   JUnit4와의 차이점?  JUnit4는 하나의 Jar Dependency로 들어오고, JUnit이 참조하는 다른 라이브러리들이 존재하는 형태 JUnit5는 그 자체로 여러 모듈로 구성되어 있음  JUnit Platform 위에 Jupiter / Vintage를 올릴 수 있는 형태 Platform: JUnit으로 작성한 테스트를 실행하는 런쳐를 제공  Console에서도 실행할 수 있고, 자바 메소드 내에서도 실행 가능 IntelliJ 등에서도 JUnit으로 작성된 코드를 실행하는 것이 가능 (JUnit Platform을 사용해서 @Test Annotation이 붙은 메소드의 실행이 가능하다."/>
+
+    <meta property="og:title" content="Junit - 1" />
+<meta property="og:description" content="JUnit?   자바 개발자가 가장 많이 사용하는 테스팅 프레임워크  이 외에도 Mockito, TestNG, Spock 등이 있다.   JUnit5는 2017년 10월에 공개가 되었다.  Spring Boot가 2.2로 버전업하면서, 기본 JUnit의 버전을 5로 올렸다.   JUnit4와의 차이점?  JUnit4는 하나의 Jar Dependency로 들어오고, JUnit이 참조하는 다른 라이브러리들이 존재하는 형태 JUnit5는 그 자체로 여러 모듈로 구성되어 있음  JUnit Platform 위에 Jupiter / Vintage를 올릴 수 있는 형태 Platform: JUnit으로 작성한 테스트를 실행하는 런쳐를 제공  Console에서도 실행할 수 있고, 자바 메소드 내에서도 실행 가능 IntelliJ 등에서도 JUnit으로 작성된 코드를 실행하는 것이 가능 (JUnit Platform을 사용해서 @Test Annotation이 붙은 메소드의 실행이 가능하다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/junit-1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-21T03:54:36&#43;09:00" />
+<meta property="article:modified_time" content="2021-03-21T03:54:36&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Junit - 1</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 21, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/java/">Java</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/test/">Test</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="junit">JUnit?</h2>
+<hr>
+<ul>
+<li>자바 개발자가 가장 많이 사용하는 테스팅 프레임워크
+<ul>
+<li>이 외에도 <code>Mockito</code>, <code>TestNG</code>, <code>Spock</code> 등이 있다.</li>
+</ul>
+</li>
+<li><code>JUnit5</code>는 2017년 10월에 공개가 되었다.
+<ul>
+<li>Spring Boot가 2.2로 버전업하면서, 기본 JUnit의 버전을 5로 올렸다.</li>
+</ul>
+</li>
+<li><code>JUnit4</code>와의 차이점?
+<ul>
+<li><code>JUnit4</code>는 하나의 Jar Dependency로 들어오고, JUnit이 참조하는 다른 라이브러리들이 존재하는 형태</li>
+<li><code>JUnit5</code>는 그 자체로 여러 모듈로 구성되어 있음
+<ul>
+<li><code>JUnit Platform</code> 위에 <code>Jupiter</code> / <code>Vintage</code>를 올릴 수 있는 형태</li>
+<li><code>Platform</code>: <code>JUnit</code>으로 작성한 테스트를 실행하는 런쳐를 제공
+<ul>
+<li>Console에서도 실행할 수 있고, 자바 메소드 내에서도 실행 가능</li>
+<li>IntelliJ 등에서도 JUnit으로 작성된 코드를 실행하는 것이 가능 (<code>JUnit Platform</code>을 사용해서 <code>@Test</code> Annotation이 붙은 메소드의 실행이 가능하다.)</li>
+</ul>
+</li>
+<li><code>Jupiter</code>: JUnit 5 용도의 TestEngine API의 구현체. 이 API는 <code>Platform</code>이 제공한다.</li>
+<li><code>Vintage</code>: JUnit 4 / 3를 지원하는 TestEngine API의 구현체</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-시작하기">JUnit5 시작하기</h2>
+<hr>
+<ul>
+<li>
+<p>IntelliJ에서 Spring Boot Project를 만든다 (w/ Spring initializer)</p>
+<ul>
+<li>
+<p>기본적으로 <code>@SpringBootApplication</code>이 붙은 클래스와 그에 해당하는 테스트 코드를 만들어주지만, 지금은 사용하지 않는다.</p>
+</li>
+<li>
+<p>Spring Boot 2.2부터는 <code>spring-boot-starter-test</code>에 의해 기본적으로 <code>JUnit5</code>를 사용할 수 있다. 의존성을 별도로 추가해주지 않아도 확인할 수 있다.</p>
+<ul>
+<li>Spring Boot로 프로젝트를 만들지 않은 경우?</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
+    <span style="color:#f92672">&lt;groupId&gt;</span>org.junit.jupiter&gt;<span style="color:#f92672">&lt;/groupId&gt;</span>
+    <span style="color:#f92672">&lt;artifactId&gt;</span>junit-jupiter-engine<span style="color:#f92672">&lt;/artifactId&gt;</span>
+    <span style="color:#f92672">&lt;version&gt;</span>5.5.2<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle">plugins <span style="color:#f92672">{</span>
+    id <span style="color:#e6db74">&#39;java&#39;</span>
+<span style="color:#f92672">}</span>
+repositories <span style="color:#f92672">{</span>
+    mavenCentral<span style="color:#f92672">()</span>
+<span style="color:#f92672">}</span>
+dependencies <span style="color:#f92672">{</span>
+    compile <span style="color:#e6db74">&#39;org.junit.jupiter:junit-jupiter:5.6.2&#39;</span>
+<span style="color:#f92672">}</span>
+test <span style="color:#f92672">{</span>
+    useJUnitPlatform<span style="color:#f92672">()</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>
+<p><code>JUnit5</code>부터는 굳이 테스트 클래스나 메소드가 <code>public</code>으로 선언될 필요가 없다.</p>
+<ul>
+<li>자바의 <code>Reflection</code>을 사용하기 때문</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>JUnit5</code> 테스트에 사용되는 여러 Annotations</p>
+<ul>
+<li><code>@Test</code>: 테스트 메소드에 사용</li>
+<li><code>@BeforeAll</code>: 테스트 클래스 내의 모든 테스트 메소드가 실행이 되기 전에 딱 한 번 호출이 됨 (Set-up)
+<ul>
+<li><code>static</code> keyword를 사용해야 한다(<code>private</code> X, <code>default</code> X)
+<ul>
+<li><code>per-class</code> test instance lifecycle이 쓰인다면 <code>non-static</code> 으로 선언될 수 있다.
+<ul>
+<li>Ref. <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle">https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>리턴 값이 존재해서는 안된다.</li>
+<li>즉, <code>static void setUp()</code>과 같이 선언되어야 한다.</li>
+</ul>
+</li>
+<li><code>@AfterAll</code>: 모든 테스트가 실행된 이후에 딱 한번 호출이 됨
+<ul>
+<li>조건은 <code>@BeforeAll</code>과 동일하다.</li>
+</ul>
+</li>
+<li><code>@BeforeEach</code>: 각각의 테스트 이전 시점에 호출됨</li>
+<li><code>@AfterEach</code>: 각각의 테스트 이후 시점에 호출됨</li>
+<li><code>@Disabled</code>: 특정 테스트를 실행하고 싶지 않을 때에 추가적으로 마킹해둘 수 있는 Annotation
+<ul>
+<li>테스트 코드가 깨졌으나 아직 해결할 방법을 찾지 못한 경우 / 코드를 잠시 나누어두어야 하는 경우</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>JUnit4</code>에서는 유사한 Annotation으로 매핑이 된다.</p>
+<ul>
+<li><code>@BeforeClass</code> / <code>@AfterClass</code></li>
+<li><code>@Before</code> / <code>@After</code></li>
+<li><code>@Ignored</code></li>
+<li>JUnit4로 작성된 코드를 5로 바꾸고 싶다? 굳이 그러지 않아도 되지만, 하고 싶다면 Annotation을 바꾸어주면 된다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="junit5-테스트-이름-표시하기">JUnit5 테스트 이름 표시하기</h2>
+<hr>
+<ul>
+<li>Ref: <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-display-names">https://junit.org/junit5/docs/current/user-guide/#writing-tests-display-names</a></li>
+<li>기본적으로는 테스트의 이름들이 Test Results에 나오며, 기본 값은 테스트 메소드의 이름을 사용한다
+<ul>
+<li>주로 긴 테스트 이름에 대해서는 <code>create_new_study</code> 와 같이 <code>_</code>를 사용한다.</li>
+</ul>
+</li>
+<li><code>@DisplayNameGeneration</code>
+<ul>
+<li>클래스와 메소드에 모두 사용이 가능하다. 클래스에 사용되면 내부의 모든 테스트 메소드에 적용</li>
+<li>Method / Class 레퍼런스를 사용해서 테스트 이름을 표기하는 방법 설정</li>
+<li>기본 구현체로, <code>ReplaceUnderscores</code> 제공
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@DisplayNameGeneration</span><span style="color:#f92672">(</span>DisplayNameGenerator<span style="color:#f92672">.</span><span style="color:#a6e22e">ReplaceUnderscores</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#75715e">// _를 빈 공백 문자로 치환
+</span></code></pre></div></li>
+</ul>
+</li>
+<li><code>@DisplayName</code>
+<ul>
+<li>직접적으로 테스트의 이름을 지정해 줄 수 있음</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@DisplayName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;This is a text for test&#39;s display name&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div></li>
+</ul>
+<h2 id="junit5-assertion">JUnit5 Assertion</h2>
+<hr>
+<ul>
+<li><code>assertNotNull</code>과 같은 것들을 사용해서 테스트 중 검증하고자 하는 조건을 정할 수 있다.</li>
+<li><code>assertEquals</code>: 실제 값이 기대한 값과 같은지 확인. <a href="https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html#assertEquals-byte-byte-java.lang.String-">Ref</a>
+<ul>
+<li>message의 경우 <code>Supplier</code> Type으로 되어 있는데, 이 때문에 <code>Supplier</code>(Lambda식)으로 넘겨주는 것도 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">assertEquals<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> Supplier<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;()</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">get</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;If you create a new study instance, status should be DRAFT&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">})</span>
+assertEquals<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;If you create a new study instance, status should be DRAFT&#34;</span><span style="color:#f92672">);</span>
+assertEquals<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;If you create a new study instance, status should be DRAFT&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div></li>
+<li>메시지를 만들 때, 에러 메시지를 만드는 방법이 복잡하다면 함수형 인터페이스 / 람다식을 활용하여 문자열 연산을 최소한으로 줄일 수 있다.
+<ul>
+<li>테스트가 실패했을 때만 문자열 연산을 함.</li>
+<li>이 방법을 사용하지 않으면 이 테스트가 성공하든 실패하든 관계없이 문자열 연산을 하게 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>assertNotNull(actual)</code>: 값이 null이 아닌지 확인</li>
+<li><code>assertTrue(boolean)</code>: 다음 조건이 참인지 확인</li>
+<li><code>assertThrows(expectedType, executable)</code>: 예외 발생 확인
+<ul>
+<li>Exception을 받아 내부의 메시지 등에 대한 추가적인 검증도 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#a6e22e">@Test</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_with_negative_limit</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">final</span> IllegalArgumentException exception <span style="color:#f92672">=</span> assertThrows<span style="color:#f92672">(</span>IllegalArgumentException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(-</span>10<span style="color:#f92672">));</span>
+      <span style="color:#66d9ef">final</span> String message <span style="color:#f92672">=</span> exception<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">();</span>
+      assertEquals<span style="color:#f92672">(</span>message<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;limit should not be negative&#34;</span><span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>assertTimeout(duration, executable)</code>: 특정 시간 안에 실행이 완료되는지 확인
+<ul>
+<li>그 테스트를 실행할 때까지 기다리고, 검증한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_with_timeout</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      assertTimeout<span style="color:#f92672">(</span>Duration<span style="color:#f92672">.</span><span style="color:#a6e22e">ofMillis</span><span style="color:#f92672">(</span>100<span style="color:#f92672">),</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+          Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>300<span style="color:#f92672">);</span>
+      <span style="color:#f92672">});</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>만약 제한 시간을 지난다면 테스트를 바로 종료시키도록 하고자 한다면? <code>assertTimeoutPreemptively</code>를 사용하면 되지만, 조심해서 사용해야 한다. 왜?
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_with_timeout</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    assertTimeoutPreemptively<span style="color:#f92672">(</span>Duration<span style="color:#f92672">.</span><span style="color:#a6e22e">ofMillis</span><span style="color:#f92672">(</span>100<span style="color:#f92672">),</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>300<span style="color:#f92672">);</span>
+    <span style="color:#f92672">});</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>코드 블록을 별도의 스레드에서 실행하기 때문에 <code>ThreadLocal</code>을 사용하는 코드가 코드 블록 내에 존재한다면..</li>
+<li>예를 들어, <code>Spring Transaction</code>같은 경우는 <code>ThreadLocal</code>을 기본전략으로 사용한다. <code>ThreadLocal</code>은 기본적으로 다른 스레드와 공유되지 않기 때문에,</li>
+<li>테스트에서는 Spring에 의해 적용한 <code>Transaction</code> 설정이 제대로 되지 않을 수 있다.
+<ul>
+<li>(e.g. <code>Transaction</code> 설정이 되는 쓰레드와 테스트에서 사용하는 쓰레드가 별개의 쓰레드이기 때문에 기본 설정인 <code>Rollback</code>이 되지 않고 DB에 반영이 되어버리는 경우가 있을 수 있다.)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>assertAll(exectuables)</code>: 모든 확인 구문 확인
+<ul>
+<li>테스트 내의 Assertion 구문들은 기본적으로 위에서 아래로 실행되면서 검증하기 때문에, 위에서 검증 실패에 의해 테스트 실패가 발생하면 아래의 구문들에 대해서는 검증을 수행하지 않는다. 각각의 구문들을 모두 테스트하기 위해서 <code>assertAll</code>을 활용할 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">assertAll<span style="color:#f92672">(</span>
+    <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> assertNotNull<span style="color:#f92672">(</span>study<span style="color:#f92672">),</span>
+    <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> assertEquals<span style="color:#f92672">(</span>StudyStatus<span style="color:#f92672">.</span><span style="color:#a6e22e">DRAFT</span><span style="color:#f92672">,</span> study<span style="color:#f92672">.</span><span style="color:#a6e22e">getStatus</span><span style="color:#f92672">(),</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;If you..&#34;</span><span style="color:#f92672">),</span>
+    <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> assertTrue<span style="color:#f92672">(</span>study<span style="color:#f92672">.</span><span style="color:#a6e22e">getLimit</span><span style="color:#f92672">()</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;The number.. &#34;</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">);</span>
+</code></pre></div></li>
+<li>이 외에도, <code>AssertJ</code>, <code>Hemcrest</code>, <code>Truth</code> 등의 라이브러리를 사용할 수도 있다.
+<ul>
+<li>Spring Boot 의존성에서는 <code>AssertJ</code>와 <code>Hemcrest</code>가 같이 들어온다</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    Study actual <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+    assertThat<span style="color:#f92672">(</span>actual<span style="color:#f92672">.</span><span style="color:#a6e22e">getLimit</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">isGreaterThan</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span> <span style="color:#75715e">// AssertJ sample
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+<h2 id="조건에-따라-테스트를-실행하는-방법">조건에 따라 테스트를 실행하는 방법</h2>
+<hr>
+<ul>
+<li>테스트 코드를 특정한 조건에 따라 실행하도록 할 수 있다.
+<ul>
+<li>조건의 예? 특정 OS / Java version / 환경변수 / 시스템변수의 값</li>
+<li><code>assumeTrue</code>, <code>assumingThat</code> 을 활용하는 방법
+<ul>
+<li>아래의 테스트는 환경변수 <code>TEST_ENV</code>의 값이 <code>LOCAL</code>일 때에만 테스트를 실행한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_under_local_env</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">final</span> String requiredTestEnvAsString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LOCAL&#34;</span><span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">final</span> String currentTestEnvAsString <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">getenv</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TEST_ENV&#34;</span><span style="color:#f92672">);</span>
+  assumeTrue<span style="color:#f92672">(</span>requiredTestEnvAsString<span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>currentTestEnvAsString<span style="color:#f92672">));</span>
+  <span style="color:#75715e">// Do Some Test
+</span><span style="color:#75715e"></span>  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Test is running&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>아래와 같이 환경변수를 수정한 뒤, IntelliJ를 재시작한뒤 테스트를 실행해보면 환경변수의 값에 따라 테스트 실행 여부가 결정됨을 알 수 있다.
+<ul>
+<li>IntelliJ를 재시작해야하는 이유는, IntelliJ가 시작될 때 이미 환경변수를 읽어서 저장해두고 사용하고 있기 때문</li>
+</ul>
+</li>
+<li><code>AssumingThat</code>을 사용하면, 조건과 함께 람다식을 주어 실행하도록 할 수 있다</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_under_local_env_using_assumingThat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">final</span> String localTestEnvAsString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LOCAL&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">final</span> String ciTestEnvAsString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;CI&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">final</span> String currentTestEnvAsString <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">getenv</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TEST_ENV&#34;</span><span style="color:#f92672">);</span>
+        
+    assumingThat<span style="color:#f92672">(</span>localTestEnvAsString<span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>currentTestEnvAsString<span style="color:#f92672">),</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;It&#39;s a local environment&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">});</span>
+        
+    assumingThat<span style="color:#f92672">(</span>ciTestEnvAsString<span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>currentTestEnvAsString<span style="color:#f92672">),</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;It&#39;s a ci environment&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">});</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>Annotation <code>@Enabled...</code>, <code>@Disabled...</code> 을 활용하는 방법
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#a6e22e">@EnabledOnOs</span><span style="color:#f92672">(</span>OS<span style="color:#f92672">.</span><span style="color:#a6e22e">MAC</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testOnMac</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// Other examples
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@EnabledOnOs</span><span style="color:#f92672">({</span>OS<span style="color:#f92672">.</span><span style="color:#a6e22e">MAC</span><span style="color:#f92672">,</span> OS<span style="color:#f92672">.</span><span style="color:#a6e22e">LINUX</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@DisabledOnOs</span><span style="color:#f92672">(</span>OS<span style="color:#f92672">.</span><span style="color:#a6e22e">MAC</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@DisabledOnJre</span><span style="color:#f92672">(</span>JRE<span style="color:#f92672">.</span><span style="color:#a6e22e">JAVA_11</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@EnabledOnJre</span><span style="color:#f92672">({</span>JRE<span style="color:#f92672">.</span><span style="color:#a6e22e">JAVA_8</span><span style="color:#f92672">,</span> JRE<span style="color:#f92672">.</span><span style="color:#a6e22e">JAVA_9</span><span style="color:#f92672">,</span> JRE<span style="color:#f92672">.</span><span style="color:#a6e22e">JAVA_10</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@EnabledIfEnvironmentVariable</span><span style="color:#f92672">(</span>named <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TEST_ENV&#34;</span><span style="color:#f92672">,</span> matches <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LOCAL&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h2 id="테스트-태깅--필터링">테스트 태깅 / 필터링</h2>
+<hr>
+<ul>
+<li>만든 테스트가 여러 개 있을 때, 조건에 따라 그룹화할 수 있다.</li>
+<li>모듈 별 그룹화, 속도 별 그룹화, 단위/통합테스트 여부에 따른 그룹화 등..</li>
+<li><code>@Tag</code>을 활용하여 테스트 메소드에 태깅을 해준다.</li>
+<li>아래와 같은 경우를 보자. <code>fast</code> 태그가 붙은 테스트는 실행하는데 얼마 걸리지 않으며, 로컬에서 실행해도 괜찮은 테스트, <code>slow</code> 태그가 붙은 테스트는 수행할 일이 많아 로컬에서 실행하기는 어렵고, CI(Continuous Integration)에 의해 빌드 서버에 의한 테스트만 수행하고 싶은 경우 아래와 같이 테스트를 태그 기반으로 나눌 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#a6e22e">@DisplayName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fast Test&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Tag</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fast&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  Study actual <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>100<span style="color:#f92672">);</span>
+  assertThat<span style="color:#f92672">(</span>actual<span style="color:#f92672">.</span><span style="color:#a6e22e">getLimit</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">isGreaterThan</span><span style="color:#f92672">(</span>0<span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#a6e22e">@Test</span>
+<span style="color:#a6e22e">@DisplayName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Slow Test&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Tag</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;slow&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_new_study_again</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  Study actual <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Study<span style="color:#f92672">(</span>100<span style="color:#f92672">);</span>
+  assertThat<span style="color:#f92672">(</span>actual<span style="color:#f92672">.</span><span style="color:#a6e22e">getLimit</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">isGreaterThan</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li><code>fast</code> 태그를 붙인 것은 로컬에서 돌릴 때 테스트를 수행하고 싶고, <code>slow</code>는 CI 환경에서만 실행하고 싶다면?</li>
+<li>IntelliJ에서는 기본적으로 태그 구분 관계 없이 모두 실행하게 된다.
+<ul>
+<li>설정을 위해서는, <code>Edit Configurations</code>에서 태그를 명시할 수 있다.
+<img src="/images/config_testByTag.png" alt="config_testByTag"></li>
+<li>주의할 점은, IntelliJ에서 최근 기본 Build / Deployment / 테스트 실행 등에 사용하는 기본 값을 IntelliJ가 아니고 설정된 빌드 시스템 (Gradle)로 설정하기 때문에, IntelliJ로 값을 바꾸어 주고 나면 위의 설정을 진행할 수 있게 된다.</li>
+</ul>
+</li>
+<li>빌드 툴 (Maven or Gradle)을 이용해 실행할 때에도 기본적으로 모두 실행하게 된다.
+<ul>
+<li>Maven의 경우 <code>&lt;profile&gt;</code> 태그가 존재하고 플러그인을 적용할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;profiles&gt;</span>
+    <span style="color:#f92672">&lt;profile&gt;</span>
+        <span style="color:#f92672">&lt;id&gt;</span>default<span style="color:#f92672">&lt;/id&gt;</span>
+        <span style="color:#f92672">&lt;activation&gt;</span>
+            <span style="color:#f92672">&lt;activeByDefault&gt;</span>true<span style="color:#f92672">&lt;/activeByDefault&gt;</span>
+        <span style="color:#f92672">&lt;/activation&gt;</span>
+        <span style="color:#f92672">&lt;build&gt;</span>
+            <span style="color:#f92672">&lt;plugins&gt;</span>
+                <span style="color:#f92672">&lt;plugin&gt;</span>
+                    <span style="color:#f92672">&lt;artifactId&gt;</span>maven-surefire-plugin&gt;<span style="color:#f92672">&lt;/artifactId&gt;</span>
+                    <span style="color:#f92672">&lt;configuration&gt;</span>
+                        <span style="color:#f92672">&lt;groups&gt;</span>fast<span style="color:#f92672">&lt;/groups&gt;</span>
+                    <span style="color:#f92672">&lt;/configuration&gt;</span>
+                <span style="color:#f92672">&lt;/plugin&gt;</span>
+            <span style="color:#f92672">&lt;/plugins&gt;</span>
+        <span style="color:#f92672">&lt;/build&gt;</span>
+    <span style="color:#f92672">&lt;profile&gt;</span>
+        <span style="color:#f92672">&lt;id&gt;</span>ci<span style="color:#f92672">&lt;/id&gt;</span>
+        <span style="color:#f92672">&lt;build&gt;</span>
+            <span style="color:#f92672">&lt;plugins&gt;</span>
+                <span style="color:#f92672">&lt;plugin&gt;</span>
+                    <span style="color:#f92672">&lt;artifactId&gt;</span>maven-surefire-plugin&gt;<span style="color:#f92672">&lt;/artifactId&gt;</span>
+                    <span style="color:#f92672">&lt;configuration&gt;</span>
+                        <span style="color:#f92672">&lt;groups&gt;</span>fast | slow<span style="color:#f92672">&lt;/groups&gt;</span>
+                    <span style="color:#f92672">&lt;/configuration&gt;</span>
+                <span style="color:#f92672">&lt;/plugin&gt;</span>
+            <span style="color:#f92672">&lt;/plugins&gt;</span>
+        <span style="color:#f92672">&lt;/build&gt;</span>
+    <span style="color:#f92672">&lt;/profile&gt;</span>
+<span style="color:#f92672">&lt;/profile&gt;</span>
+</code></pre></div><ul>
+<li>이렇게 설정하고, mvn 테스트 실행 시에 프로필을 넘겨주면 그에 맞는 그룹들만 실행하게 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./mvnw test -P ci
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>Gradle</code>의 경우 Tag를 사용한 테스트 <code>Task</code>를 등록하여 사용할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle"><span style="color:#66d9ef">def</span> fastTestTask <span style="color:#f92672">=</span> tasks<span style="color:#f92672">.</span><span style="color:#a6e22e">register</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fastTest&#34;</span><span style="color:#f92672">,</span> Test<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  useJUnitPlatform <span style="color:#f92672">{</span>
+      includeTags <span style="color:#e6db74">&#34;fast&#34;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="추가-키워드-및-참고-링크">추가 키워드 및 참고 링크</h3>
+<ul>
+<li><a href="https://www.inflearn.com/course/the-java-application-test/dashboard">백기선의 더 자바, 애플리케이션을 테스트하는 다양한 방법</a></li>
+<li><a href="https://junit.org/junit5/docs/current/user-guide/">https://junit.org/junit5/docs/current/user-guide/</a></li>
+<li><a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations">https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations</a></li>
+<li><a href="https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html">https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html</a></li>
+<li><a href="https://stackoverflow.com/questions/40891867/junit5-tag-specific-gradle-task">https://stackoverflow.com/questions/40891867/junit5-tag-specific-gradle-task</a></li>
+<li><a href="https://javabydeveloper.com/run-tag-specific-junit-5-tests-from-gradle-command/">https://javabydeveloper.com/run-tag-specific-junit-5-tests-from-gradle-command/</a></li>
+<li><a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-tag-expressions">https://junit.org/junit5/docs/current/user-guide/#running-tests-tag-expressions</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

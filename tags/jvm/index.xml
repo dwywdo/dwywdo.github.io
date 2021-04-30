@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JVM on DWYWDO</title>
+    <link>https://dwywdo.github.io/tags/jvm/</link>
+    <description>Recent content in JVM on DWYWDO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jan 2021 01:07:50 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM의 개념과 Java 코드 컴파일 및 실행 방법에 대한 정리</title>
+      <link>https://dwywdo.github.io/post/what-is-jvm-and-how-to-execute-java/</link>
+      <pubDate>Tue, 19 Jan 2021 01:07:50 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/what-is-jvm-and-how-to-execute-java/</guid>
+      <description>JVM이란 무엇인가    JVM은 자바 프로그램이 실행되는 데에 필요한 런타임 환경을 제공하는 프로그램이다.
+ The JVM is a program that provides the runtime environment necessary for Java programs to execute. &amp;ndash; Evans, B., &amp;amp; Flanagan, D. (2018). Java in a Nutshell. Van Duuren Media.
+   자바 프로그램은 실행되고자 하는 환경의 하드웨어 / OS 플랫폼에 맞는 JVM이 없다면 실행될 수 없다.
+  즉, JVM은 하드웨어/운영체제에 종속적이지만, JVM이 가용하기만 하다면 자바 프로그램 자체는 그에 독립적으로 실행될 수 있다고 말할 수 있다.</description>
+    </item>
+    
+  </channel>
+</rss>

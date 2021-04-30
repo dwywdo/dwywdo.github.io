@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Gradle 이란 무엇인가 // DWYWDO</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gradle 이란 무엇인가"/>
+<meta name="twitter:description" content="Gradle이란 무엇인가   Ref  https://www.youtube.com/watch?v=s-XZ5B15ZJ0&amp;list=PL7mmuO705dG2pdxCYCCJeAgOeuQN1seZz&amp;index=1 https://docs.gradle.org/current/userguide/userguide.html   빌드를 수행하기 위한 빌드 시스템/도구/툴로, ant, maven과 같은 빌드 도구라고 볼 수 있다. 빌드를 위한 언어이다. 개발을 수행할 때 직접적으로 와닿지는 않지만, 중요한 부분이다. Java와 유사한 Groovy(Link)를 기반으로 한다.  Groovy: 자바 플랫폼을 기반으로 한 스크립트 언어. 컴파일을 거쳐 실행할 수도 있고, 직접 스크립트로도 실행이 가능하다. Java와 호환이 되기 때문에, Java로 작성된 소스코드를 Groovy에서 활용할 수도 있고, Groovy에서 자바 라이브러리를 사용할 수도 있다   maven이나 ant로 구성된 빌드시스템을 gradle로 손쉽게 바꿀 수 있다."/>
+
+    <meta property="og:title" content="Gradle 이란 무엇인가" />
+<meta property="og:description" content="Gradle이란 무엇인가   Ref  https://www.youtube.com/watch?v=s-XZ5B15ZJ0&amp;list=PL7mmuO705dG2pdxCYCCJeAgOeuQN1seZz&amp;index=1 https://docs.gradle.org/current/userguide/userguide.html   빌드를 수행하기 위한 빌드 시스템/도구/툴로, ant, maven과 같은 빌드 도구라고 볼 수 있다. 빌드를 위한 언어이다. 개발을 수행할 때 직접적으로 와닿지는 않지만, 중요한 부분이다. Java와 유사한 Groovy(Link)를 기반으로 한다.  Groovy: 자바 플랫폼을 기반으로 한 스크립트 언어. 컴파일을 거쳐 실행할 수도 있고, 직접 스크립트로도 실행이 가능하다. Java와 호환이 되기 때문에, Java로 작성된 소스코드를 Groovy에서 활용할 수도 있고, Groovy에서 자바 라이브러리를 사용할 수도 있다   maven이나 ant로 구성된 빌드시스템을 gradle로 손쉽게 바꿀 수 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/what-is-gradle/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-21T03:48:03&#43;09:00" />
+<meta property="article:modified_time" content="2021-01-21T03:48:03&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>DWYWDO</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Gradle 이란 무엇인가</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 21, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/gradle/">Gradle</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="gradle이란-무엇인가">Gradle이란 무엇인가</h2>
+<hr>
+<ul>
+<li>Ref
+<ul>
+<li><a href="https://www.youtube.com/watch?v=s-XZ5B15ZJ0&amp;list=PL7mmuO705dG2pdxCYCCJeAgOeuQN1seZz&amp;index=1">https://www.youtube.com/watch?v=s-XZ5B15ZJ0&amp;list=PL7mmuO705dG2pdxCYCCJeAgOeuQN1seZz&amp;index=1</a></li>
+<li><a href="https://docs.gradle.org/current/userguide/userguide.html">https://docs.gradle.org/current/userguide/userguide.html</a></li>
+</ul>
+</li>
+<li>빌드를 수행하기 위한 빌드 시스템/도구/툴로, <code>ant</code>, <code>maven</code>과 같은 빌드 도구라고 볼 수 있다. 빌드를 위한 언어이다.</li>
+<li>개발을 수행할 때 직접적으로 와닿지는 않지만, 중요한 부분이다.</li>
+<li>Java와 유사한 <code>Groovy</code>(<a href="https://groovy-lang.org/documentation.html">Link</a>)를 기반으로 한다.
+<ul>
+<li><code>Groovy</code>: 자바 플랫폼을 기반으로 한 스크립트 언어.</li>
+<li>컴파일을 거쳐 실행할 수도 있고, 직접 스크립트로도 실행이 가능하다.</li>
+<li>Java와 호환이 되기 때문에, Java로 작성된 소스코드를 <code>Groovy</code>에서 활용할 수도 있고, <code>Groovy</code>에서 자바 라이브러리를 사용할 수도 있다</li>
+</ul>
+</li>
+<li><code>maven</code>이나 <code>ant</code>로 구성된 빌드시스템을 <code>gradle</code>로 손쉽게 바꿀 수 있다.</li>
+<li>자바 이외에 스칼라, 그루비, C/C++에 대해서도 빌드가 가능하다.</li>
+<li>오픈소스 기반으로, 새로운 기능이 추가 및 보완되고 있다.</li>
+<li>추가된 기능은 <code>DSL(Domain Specific Language)</code>을 통해서 제공된다.</li>
+</ul>
+<h3 id="dsl-활용-시-주의해야-할-부분">DSL 활용 시 주의해야 할 부분</h3>
+<ul>
+<li>Ref: <a href="https://docs.gradle.org/current/dsl/index.html">https://docs.gradle.org/current/dsl/index.html</a></li>
+<li>비공개(Internal): <code>DSL</code> / <code>API</code>로 제공 및 공개하지 않는 상태</li>
+<li>실험상태(Incubating): 기능은 추가되어 있으나, 개선 및 변경의 여지가 있는 상태</li>
+<li>공개상태(Public): 기능이 검증되어 활용이 가능한 상태</li>
+<li>폐지상태(Deprecated): Gradle의 버전이 업그레이드 되면서 없어질 예정이거나, 불필요하게 될 부분이 있는 상태
+<ul>
+<li>이 상태에서도 사용할 수는 있으나, 언제 없어질 지 알 수 없다.</li>
+</ul>
+</li>
+<li>Ref: <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html">https://docs.gradle.org/current/dsl/org.gradle.api.Project.html</a>
+<ul>
+<li>Core types의 <code>Project</code> 객체를 확인하면, 프로젝트 객체에서 제공하는 속성 / 관련 기능을 확인할 수 있다.
+<ul>
+<li>이 기능들에 위의 상태들이 태그가 붙어 있는 것을 볼 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="gradle의-빌드-수행-구성-요소">Gradle의 빌드 수행 구성 요소</h3>
+<ul>
+<li><strong>초기화 스크립트</strong> (init script): <code>init.gradle</code> - <code>Gradle 객체</code>와 연관됨</li>
+<li><strong>설정 스크립트</strong> (setting script) - <code>settings.gradle</code> - <code>Settings 객체</code>와 연관됨
+<ul>
+<li>프로젝트 구조, 싱글인지 멀티프로젝트인지 등의 설정이 가능</li>
+</ul>
+</li>
+<li><strong>빌드 스크립트</strong> (build script) - <code>build.gradle</code> - <code>Project 객체</code>와 연관됨
+<ul>
+<li>빌드 수행과 관련되어 의존 관계, Task, Repository 등이 정의됨</li>
+<li>Gradle의 기본 객체들을 통해 초기화 스크립트, 설정 스크립트의 내용 등을 참조할 수 있다.</li>
+</ul>
+</li>
+<li><strong>속성 파일</strong>: <code>gradle.properties</code>: 빌드 환경 속성에 대한 내용들이 존재. 보통 해당 프로젝트 하위에 위치한다.</li>
+<li><strong>환경변수</strong>: 시스템에 등록한 Gradle 설치 정보</li>
+<li><strong>명령어 옵션</strong>: 빌드 수행 시 명령어와 옵션 정보를 인수로 전달하는 것이 가능
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gradle -Pname<span style="color:#f92672">=</span>gradle hello <span style="color:#75715e">#name 변수에 gradle을 전달하면서 &#39;hello&#39; task 수행</span>
+</code></pre></div></li>
+<li><strong>프로젝트 디렉터리(buildSrc)</strong>: 빌드 수행 시 클래스 파일이나, 플러그인을 저장하여 참조하는 디렉터리</li>
+</ul>
+<h3 id="gradle의-빌드-수행-단계">Gradle의 빌드 수행 단계</h3>
+<ol>
+<li><strong>명령어 해석</strong>: 옵션 및 인수/디렉터리/속성 파일 등을 확인하고 클래스 인스턴스 생성</li>
+</ol>
+<ul>
+<li><code>daemon</code>, <code>GUI</code>, <code>CLI</code> 모드가 있으며, 명령어 옵션으로 구분하여 실행할 수 있다.</li>
+<li>두 가지 이상의 모드를 같이 사용하면, 내부적인 우선순위에 의해 선택된 모드로 실행됨 <code>GUI</code> &gt; <code>daemon</code></li>
+</ul>
+<ol start="2">
+<li><strong>Gradle 실행</strong></li>
+<li><strong>Script 초기화</strong>: Script 파일 읽음. 멀티 or 싱글 프로젝트 등을 판단하고, <code>Project 객체</code>를 생성</li>
+<li><strong>Project Settings</strong>: 참조 중인 라이브러리 확인, <code>Task 객체</code> 및 <code>Task Graph</code> 생성</li>
+</ol>
+<ul>
+<li><code>Task Graph</code>는 <code>Task</code> 간의 의존관계를 나타냄</li>
+</ul>
+<ol start="5">
+<li><strong>Task Graph에 기반해서 Task를 실행</strong></li>
+<li><strong>결과 출력</strong></li>
+</ol>
+<h3 id="gradle의-스크립트-파일-구조">Gradle의 스크립트 파일 구조</h3>
+<ul>
+<li><code>Statement</code>와 <code>Script Block</code>으로 구성된다.</li>
+<li><code>Statement</code>: 변수를 정의하는 부분이라고 생각할 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#66d9ef">def</span> id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gradle&#39;</span>
+</code></pre></div><ul>
+<li><code>Script Block</code>: repository나, task 등 여러 프로젝트 빌드와 관련된 정보를 표현하는 데에 사용한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">repositories <span style="color:#f92672">{</span>
+    mavenCentral<span style="color:#f92672">()</span>
+<span style="color:#f92672">}</span>
+
+task idCheck<span style="color:#f92672">&lt;&lt;{</span>
+    <span style="color:#66d9ef">def</span> id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;check&#39;</span>
+    println <span style="color:#e6db74">&#39;id: &#39;</span> <span style="color:#f92672">+</span> id
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li><code>repositories</code>: 저장소 설정</li>
+<li><code>dependencies</code>: 의존 관계 설정</li>
+<li><code>buildscript</code>: 빌드 스크립트 클래스 패스 설정</li>
+<li><code>initscript</code>: 초기화 스크립트 설정</li>
+<li><code>configurations</code>: 환경 구성 설정</li>
+<li><code>allprojects</code>: 서브프로젝트 포함한 전체 프로젝트 설정</li>
+<li><code>subproejcts</code>: 서브프로젝트 설정</li>
+<li><code>artifacts</code>: 빌드 결과에 대한 설정</li>
+</ul>
+<h3 id="gradle의-변수와-속성properties">Gradle의 변수와 속성(Properties)</h3>
+<ul>
+<li>지역 변수: 선언된 부분이 Scope인 변수. Gradle의 모든 스크립트에서 사용 가능</li>
+<li>시스템 속성: 시스템 관련 정보를 저장하는 변수. Gradle의 모든 스크립트에서 사용 가능
+<ul>
+<li><code>-D</code> 옵션 또는 <code>--system-prop</code> 옵션 사용해서 지정 (<code>gradle -D[속성명]=[속성값]</code> OR <code>gradle --system-prop [속성명]=[속성값]</code>)</li>
+<li>gradle.properties에서 <code>systemProp.[속성명]=[속성값]</code>와 같이 설정 가능</li>
+<li>스크립트 내에서 접근할 때에는 <code>System.properties['속성명']</code>과 같이 사용 가능</li>
+</ul>
+</li>
+<li>확장 속성: 도메인 객체의 확장 용도로 사용되는 변수. Gradle의 모든 스크립트에서 사용 가능
+<ul>
+<li><code>ext</code> 키워드로 사용 가능하다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">ext <span style="color:#f92672">{</span>
+    extPro1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pro1&#39;</span>
+    extPro2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pro2&#39;</span>
+<span style="color:#f92672">}</span>
+println ext<span style="color:#f92672">.</span><span style="color:#a6e22e">extPro1</span> <span style="color:#75715e">// pro1
+</span><span style="color:#75715e"></span>println ext<span style="color:#f92672">.</span><span style="color:#a6e22e">extPro2</span> <span style="color:#75715e">// pro2
+</span></code></pre></div></li>
+<li>프로젝트 속성: 프로젝트에서 사용되는 변수. 빌드 스크립트에서만 사용된다.
+<ul>
+<li><code>-P</code> 옵션 또는 <code>-project-prop</code> 옵션 사용해서 설정 가능</li>
+</ul>
+</li>
+<li>속성 파일과 명령어로 지정된 속성의 이름이 같으면 어떤 값을 사용하는가?
+<ul>
+<li>Ref: <a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties</a></li>
+<li>우선순위가 존재한다.
+<ul>
+<li><code>프로젝트 디렉터리의 gradle.properties</code></li>
+<li><code>홈 디렉터리의 gradle.properties</code></li>
+<li><code>환경 변수</code></li>
+<li><code>-D 옵션</code></li>
+<li><code>-P 옵션</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
