@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Spring Bean // dwywdo</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="dwywdo" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring Bean"/>
+<meta name="twitter:description" content="Spring의 Bean에 대하여   Spring의 IoC 컨테이너에 의해 관리되는 하나 이상의 객체들을 모두 빈(Bean)이라고 부른다.  빈은 IoC 컨테이너 생성 시 제공하는 Configuration Metadata에 의해 생성된다. 예를 들어 XML기반의 메타데이터 구성 시 &lt;bean/&gt; 태그를 통해서 생성된다 빈의 정의 그 자체에 대한 내용은 컨테이너 내부에서 BeanDefinition이라는 객체로 표현되며, 아래와 같은 정보들을 담고 있다.  Package-qualified 클래스 이름 (정의된 빈의 실제 구현 클래스) Behavioral 설정 요소 (Scope, Lifecycle callbacks와 같은 정보) Collaborator / Depedency 정보 (해당 빈이 동작하기 위해 필요한 다른 빈들에 대한 레퍼런스) 다른 설정 정보들 (예를 들어 Connection Pool을 관리하는 빈 내에서의 Pool 사이즈, 커넥션의 수 제한 등)   위의 요소들은 모두 Bean Definition을 구성하는 속성들이라고 볼 수 있으며, 스프링 문서의 여러 장에 걸쳐서 각각 소개되고 있다."/>
+
+    <meta property="og:title" content="Spring Bean" />
+<meta property="og:description" content="Spring의 Bean에 대하여   Spring의 IoC 컨테이너에 의해 관리되는 하나 이상의 객체들을 모두 빈(Bean)이라고 부른다.  빈은 IoC 컨테이너 생성 시 제공하는 Configuration Metadata에 의해 생성된다. 예를 들어 XML기반의 메타데이터 구성 시 &lt;bean/&gt; 태그를 통해서 생성된다 빈의 정의 그 자체에 대한 내용은 컨테이너 내부에서 BeanDefinition이라는 객체로 표현되며, 아래와 같은 정보들을 담고 있다.  Package-qualified 클래스 이름 (정의된 빈의 실제 구현 클래스) Behavioral 설정 요소 (Scope, Lifecycle callbacks와 같은 정보) Collaborator / Depedency 정보 (해당 빈이 동작하기 위해 필요한 다른 빈들에 대한 레퍼런스) 다른 설정 정보들 (예를 들어 Connection Pool을 관리하는 빈 내에서의 Pool 사이즈, 커넥션의 수 제한 등)   위의 요소들은 모두 Bean Definition을 구성하는 속성들이라고 볼 수 있으며, 스프링 문서의 여러 장에 걸쳐서 각각 소개되고 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/spring-bean/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-05T03:12:19&#43;09:00" />
+<meta property="article:modified_time" content="2021-05-05T03:12:19&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/images/dawn.jpeg" alt="dwywdo" /></a>
+      <h1>dwywdo</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+            <br><br>
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p> </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/dwywdo" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Spring Bean</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 5, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/spring/">Spring</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/bean/">Bean</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="spring의-bean에-대하여">Spring의 Bean에 대하여</h2>
+<hr>
+<ul>
+<li>Spring의 IoC 컨테이너에 의해 관리되는 하나 이상의 객체들을 모두 빈(Bean)이라고 부른다.
+<ul>
+<li>빈은 IoC 컨테이너 생성 시 제공하는 <code>Configuration Metadata</code>에 의해 생성된다. 예를 들어 XML기반의 메타데이터 구성 시 <code>&lt;bean/&gt;</code> 태그를 통해서 생성된다</li>
+<li>빈의 정의 그 자체에 대한 내용은 컨테이너 내부에서 <code>BeanDefinition</code>이라는 객체로 표현되며, 아래와 같은 정보들을 담고 있다.
+<ul>
+<li><code>Package-qualified</code> 클래스 이름 (정의된 빈의 실제 구현 클래스)</li>
+<li><code>Behavioral</code> 설정 요소 (Scope, Lifecycle callbacks와 같은 정보)</li>
+<li><code>Collaborator / Depedency</code> 정보 (해당 빈이 동작하기 위해 필요한 다른 빈들에 대한 레퍼런스)</li>
+<li>다른 설정 정보들 (예를 들어 Connection Pool을 관리하는 빈 내에서의 Pool 사이즈, 커넥션의 수 제한 등)</li>
+</ul>
+</li>
+<li>위의 요소들은 모두 Bean Definition을 구성하는 속성들이라고 볼 수 있으며, 스프링 문서의 여러 장에 걸쳐서 각각 소개되고 있다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="빈bean의-이름">빈(Bean)의 이름</h2>
+<hr>
+<ul>
+<li>모든 빈은 하나 이상의 식별자를 가지며, 각각의 식별자는 빈들을 호스팅하는 (IoC) 컨테이너 내에서 유일하다.</li>
+<li>기본적으로는 하나의 식별자만 존재하지만, 여러 개가 필요하다면 추가적인 것들은 alias로서 간주된다.</li>
+<li>아직까지 파일 레벨에서 살펴본 것은 XML 기반의 구성밖에 없기에, XML 파일에서 빈의 이름을 어떻게 정하는지 아래의 예를 통해 살펴보자
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;myFirstBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.FirstBean&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;mySecondBean&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;mySecondBeanName, mySecondBeanAlias&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.SecondBean&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#75715e">&lt;!-- more bean definitions go here --&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><ul>
+<li><code>myFirstBean</code>, <code>mySecondBean</code> 두 개의 빈이 생성 및 관리되도록 구성되어 있다.</li>
+<li><code>id</code> 속성(attribute)는 고유한 하나의 식별자를 명시하는 데에 사용된다.</li>
+<li><code>mySecondBean</code> 부분의 <code>name</code> 속성은 해당 빈에 대해 alias를 추가하고 싶을 때 사용할 수 있으며, <code>,</code> 나 <code>;</code>, 공백을 통해 여러 alias도 지정할 수 있다.</li>
+</ul>
+</li>
+<li><code>id</code>, <code>name</code> 속성을 통해 빈에 이름을 부여하는 것이 필수적인 것은 아니다. 다만, 다른 빈의 정의에서 의존성 등을 명시하기 위해서는 반드시 ref에 해당 빈을 식별할 수 있는 이름을 지정해주어야 한다
+<ul>
+<li>의도적으로 이름을 부여하지 않는 경우에 대해서 문서에서는 아래의 케이스를 참고하라고 하지만.. 지금은 일단 넘어가자
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-inner-beans">Inner Beans</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire">Autowiring Collaborators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Bean Naming Convention</strong>: 빈의 이름을 지을 때에는 보통 자바의 인스턴스 필드에 적용하는 표준 컨벤션을 그대로 적용한다.
+<ul>
+<li>즉, camel-cased 이름을 사용한다.</li>
+<li><code>accountManager</code>, <code>accountService</code>, <code>userDao</code>, <code>loginController</code> 등..</li>
+</ul>
+</li>
+<li>클래스패스 내의 컴포넌트들을 스캐닝하는 과정에서, 스프링은 이름이 부여되지 않은 빈들에 대해 자동적으로 아래의 규칙을 사용해 이름을 생성한다.
+<ul>
+<li>우선 단순히 클래스의 이름을 그대로 사용하되 가장 첫 글자는 소문자로 바꾼다.</li>
+<li>다만, 두 글자까지 모두 대문자라면 (예를 들어 <code>ACcountManager</code>, 조금 억지지만..) 가장 첫 글자를 소문자로 바꾸지 않는다.</li>
+<li>이 규칙은 <code>java.beans.Introspector.decapitalize</code>에서 사용하는 규칙과 동일하다 (스프링이 이것을 사용한다.)</li>
+</ul>
+</li>
+</ul>
+<h3 id="bean-definition-밖에서의-aliasing">Bean Definition 밖에서의 Aliasing</h3>
+<ul>
+<li>꼭 빈을 생성하는 곳에서만 <code>name</code> 속성으로 alias를 부여할 수 있는 것은 아니다.</li>
+<li>XML 파일들이 하나의 시스템 내의 여러 서브 시스템에 각각 정의되어 있다면, 아래와 같이 <code>&lt;alias/&gt;</code> 태그를 사용해 추가적인 이름을 부여할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;alias</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;fromName&#34;</span> <span style="color:#a6e22e">alias=</span><span style="color:#e6db74">&#34;toName&#34;</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><ul>
+<li>위의 설정은 동일 컨테이너 내의 <code>fromName</code>이라는 이름을 갖는 빈을 <code>toName</code>으로 참조할 수 있도록 한다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="bean-초기화-instantiating-beans">Bean 초기화 (Instantiating Beans)</h2>
+<hr>
+<ul>
+<li>
+<p>위의 XML 파일을 이번에는 빈 초기화의 관점에서 다시 살펴보자.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;myFirstBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.FirstBean&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;mySecondBean&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;mySecondBeanName, mySecondBeanAlias&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.SecondBean&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#75715e">&lt;!-- more bean definitions go here --&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><ul>
+<li>기본적으로 아래의 두 경우를 제외하고는 <code>&lt;bean/&gt;</code> 태그의 <code>class</code> 속성은 필수이다.
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class-instance-factory-method">Instance Factory Method를 이용해 빈을 초기화하는 경우</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions">빈 정의를 상속받는 경우</a></li>
+</ul>
+</li>
+<li><code>class</code> 속성은 두 가지 방법으로 사용될 수 있다.
+<ol>
+<li>자바의 <code>new</code>와 같은 방식으로, 인스턴스화 될 클래스를 정의해줌으로써 인스턴스가 초기화될 때 해당 클래스의 생성자가 호출된다.</li>
+<li><code>static</code> 팩토리 메소드를 갖는 클래스를 정의해줌으로써 빈 인스턴스는 해당 팩토리 메소드를 통해 생성된다. 이 방식을 통해 생성되는 빈 인스턴스는 명시된 클래스와 같을수도, 다를수도 있다.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Nested</code> 클래스에 대한 빈을 생성하고자 한다면? 만약 Something 클래스 내에 <code>static</code>으로 정의된 <code>OtherThing</code> 클래스가 존재한다면?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;nestedClass&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.SomeThing$OtherThing&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#75715e">&lt;!-- OR --&gt;</span>
+<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;nestedClass&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.SomeThing.OtherThing&#34;</span><span style="color:#f92672">&gt;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="빈-인스턴스의-초기화는-실제로-어떻게-진행될까">빈 인스턴스의 초기화는 실제로 어떻게 진행될까?</h3>
+<hr>
+<ul>
+<li>위에서 가볍게 언급했듯, 스프링은 DI 메커니즘의 하나로 생성자 혹은 팩토리 메서드를 이용하여 빈을 생성한다.
+<ul>
+<li>생성자를 이용</li>
+<li>Static 팩토리 메소드 이용</li>
+<li>인스턴스 non-static 팩토리 메소드 이용</li>
+</ul>
+</li>
+<li>다만 이를 이해하기 위해서는 스프링에서 Dependencies를 다루는 방식에 대해 같이 정리되면 좋을 것 같다. 실제 문서에도 그 쪽을 더 자세히 보라고 되어 있다(..)</li>
+<li>다음에 <code>Dependencies</code> 부분을 읽을 때 정리해보도록 하자..</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

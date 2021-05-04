@@ -6,7 +6,26 @@
     <description>Recent content on dwywdo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Apr 2021 10:48:36 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 May 2021 03:12:19 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Bean</title>
+      <link>https://dwywdo.github.io/post/spring-bean/</link>
+      <pubDate>Wed, 05 May 2021 03:12:19 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/spring-bean/</guid>
+      <description>Spring의 Bean에 대하여   Spring의 IoC 컨테이너에 의해 관리되는 하나 이상의 객체들을 모두 빈(Bean)이라고 부른다.  빈은 IoC 컨테이너 생성 시 제공하는 Configuration Metadata에 의해 생성된다. 예를 들어 XML기반의 메타데이터 구성 시 &amp;lt;bean/&amp;gt; 태그를 통해서 생성된다 빈의 정의 그 자체에 대한 내용은 컨테이너 내부에서 BeanDefinition이라는 객체로 표현되며, 아래와 같은 정보들을 담고 있다.  Package-qualified 클래스 이름 (정의된 빈의 실제 구현 클래스) Behavioral 설정 요소 (Scope, Lifecycle callbacks와 같은 정보) Collaborator / Depedency 정보 (해당 빈이 동작하기 위해 필요한 다른 빈들에 대한 레퍼런스) 다른 설정 정보들 (예를 들어 Connection Pool을 관리하는 빈 내에서의 Pool 사이즈, 커넥션의 수 제한 등)   위의 요소들은 모두 Bean Definition을 구성하는 속성들이라고 볼 수 있으며, 스프링 문서의 여러 장에 걸쳐서 각각 소개되고 있다.</description>
+    </item>
+    
+    <item>
+      <title>Spring IoC</title>
+      <link>https://dwywdo.github.io/post/spring-ioc/</link>
+      <pubDate>Sat, 01 May 2021 16:17:13 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/spring-ioc/</guid>
+      <description>IoC 컨테이너   스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.   It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
+   위의 문구는 Spring framework documentation에서 IoC에 대해 설명한 문장을 발췌해온 것으로, 풀어 써보면 아래와 같다.</description>
+    </item>
+    
     <item>
       <title>Mockito 란 무엇인가</title>
       <link>https://dwywdo.github.io/post/what-is-mockito/</link>
@@ -32,6 +51,15 @@
       
       <guid>https://dwywdo.github.io/post/junit-2/</guid>
       <description>Custom Tag   JUnit5가 제공하는 애노테이션들은 Meta Annotation이기 때문에, Composed Annotation을 만들어서 사용할 수 있다. 커스텀한 애노테이션을 만들 때, 그 위에 저 Meta Annotation을 사용할 수 있다는 의미이다. 커스텀 애노테이션 선언 @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다. @Test // Jupiter가 제공하는 애노테이션 @Tag(&amp;#34;fast&amp;#34;) public @interface FastTest { } @Target(ElementType.METHOD) // 애노테이션 적용 대상: 메소드 @Retention(RetentionPolicy.RUNTIME) // Retention Strategy: 이 애노테이션을 사용한 코드가 애노테이션 정보를 런타임까지 유지해야 한다.</description>
+    </item>
+    
+    <item>
+      <title>자바 데이터 타입, 변수, Conversion, 그리고 Casting</title>
+      <link>https://dwywdo.github.io/post/java-data-types/</link>
+      <pubDate>Sat, 13 Mar 2021 09:48:03 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/java-data-types/</guid>
+      <description>자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0.</description>
     </item>
     
     <item>
@@ -62,15 +90,6 @@
  The JVM is a program that provides the runtime environment necessary for Java programs to execute. &amp;ndash; Evans, B., &amp;amp; Flanagan, D. (2018). Java in a Nutshell. Van Duuren Media.
    자바 프로그램은 실행되고자 하는 환경의 하드웨어 / OS 플랫폼에 맞는 JVM이 없다면 실행될 수 없다.
   즉, JVM은 하드웨어/운영체제에 종속적이지만, JVM이 가용하기만 하다면 자바 프로그램 자체는 그에 독립적으로 실행될 수 있다고 말할 수 있다.</description>
-    </item>
-    
-    <item>
-      <title>자바 데이터 타입, 변수, Conversion, 그리고 Casting</title>
-      <link>https://dwywdo.github.io/post/java-data-types/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dwywdo.github.io/post/java-data-types/</guid>
-      <description>자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0.</description>
     </item>
     
   </channel>

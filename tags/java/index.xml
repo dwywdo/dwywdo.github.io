@@ -35,6 +35,15 @@
     </item>
     
     <item>
+      <title>자바 데이터 타입, 변수, Conversion, 그리고 Casting</title>
+      <link>https://dwywdo.github.io/post/java-data-types/</link>
+      <pubDate>Sat, 13 Mar 2021 09:48:03 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/java-data-types/</guid>
+      <description>자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0.</description>
+    </item>
+    
+    <item>
       <title>JVM의 개념과 Java 코드 컴파일 및 실행 방법에 대한 정리</title>
       <link>https://dwywdo.github.io/post/what-is-jvm-and-how-to-execute-java/</link>
       <pubDate>Tue, 19 Jan 2021 01:07:50 +0900</pubDate>
@@ -44,15 +53,6 @@
  The JVM is a program that provides the runtime environment necessary for Java programs to execute. &amp;ndash; Evans, B., &amp;amp; Flanagan, D. (2018). Java in a Nutshell. Van Duuren Media.
    자바 프로그램은 실행되고자 하는 환경의 하드웨어 / OS 플랫폼에 맞는 JVM이 없다면 실행될 수 없다.
   즉, JVM은 하드웨어/운영체제에 종속적이지만, JVM이 가용하기만 하다면 자바 프로그램 자체는 그에 독립적으로 실행될 수 있다고 말할 수 있다.</description>
-    </item>
-    
-    <item>
-      <title>자바 데이터 타입, 변수, Conversion, 그리고 Casting</title>
-      <link>https://dwywdo.github.io/post/java-data-types/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dwywdo.github.io/post/java-data-types/</guid>
-      <description>자바의 프리미티브(Primitive) 타입 종류와 값의 범위, 그리고 기본 값   자바는 변수에 대한 8가지 기본 타입을 제공하며, 이를 Primitive Types 이라고 부른다. Primitive type은 Boolean, Character, 4개의 Integer, 2개의 Floating-point 타입으로 구성되어 있다. Integer 타입과 Floating-point 타입은 모두 수를 표현하지만, 구성하고 있는 비트의 수/나타내는 방법 등이 다르다.     Type Contains Default Size Range     boolean true or false false 1 bit NA   byte Signed integer 0 8 bits -128 to 127   short Signed integer 0 16 bits -32768 to 32767   int Signed integer 0 32 bits -2147483648 to 2147483647   long Signed integer 0 63 bits -9223372036854775808 to 9223372036854775807   float IEEE 754 floating point 0.</description>
     </item>
     
   </channel>

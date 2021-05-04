@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Spring IoC // dwywdo</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="dwywdo" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring IoC"/>
+<meta name="twitter:description" content="IoC 컨테이너   스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.   It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
+   위의 문구는 Spring framework documentation에서 IoC에 대해 설명한 문장을 발췌해온 것으로, 풀어 써보면 아래와 같다."/>
+
+    <meta property="og:title" content="Spring IoC" />
+<meta property="og:description" content="IoC 컨테이너   스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.   It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
+   위의 문구는 Spring framework documentation에서 IoC에 대해 설명한 문장을 발췌해온 것으로, 풀어 써보면 아래와 같다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/spring-ioc/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-01T16:17:13&#43;09:00" />
+<meta property="article:modified_time" content="2021-05-01T16:17:13&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/images/dawn.jpeg" alt="dwywdo" /></a>
+      <h1>dwywdo</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+            <br><br>
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p> </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/dwywdo" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Spring IoC</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 1, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/spring/">Spring</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/ioc/">IoC</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/di/">DI</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="ioc-컨테이너">IoC 컨테이너</h2>
+<hr>
+<ul>
+<li>스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.</li>
+</ul>
+<blockquote>
+<p><em>It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.</em></p>
+</blockquote>
+<ul>
+<li>
+<p>위의 문구는 <code>Spring framework documentation</code>에서 IoC에 대해 설명한 문장을 발췌해온 것으로, 풀어 써보면 아래와 같다.</p>
+<ul>
+<li>객체들이 자신들의 의존성을 정의하는 프로세스 중 하나이다.(여기서 의존성은 객체들이 관계를 가지고 있는 다른 객체들을 의미)</li>
+<li>IoC에서의 의존성 정의는 아래와 같은 방법들에 의해서만 수행된다
+<ul>
+<li>생성자에 주어지는 인자</li>
+<li>팩토리 메소드(객체 생성을 위한 특수한 목적의 메소드)에 주어지는 인자</li>
+<li>객체 인스턴스가 팩토리 메소드나 생성자에 의해 생성된 후 설정되는 속성(Properties)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>스프링 프레임워크에서는 위의 IoC 메커니즘을 지원하기 위해 IoC 컨테이너라는 것을 가지고 있으며, 그 기반이 되는 패키지는 아래와 같다</p>
+<ul>
+<li><code>org.springframework.beans</code></li>
+<li><code>org.springframework.context</code></li>
+<li>저 두 패키지 안에는 기본적으로 <code>BeanFactory</code> 인터페이스가 존재하며, 다양한 타입의 객체 관리 및 설정 (Configuration) 메커니즘 관련 기능을 제공한다.
+<ul>
+<li><code>ApplicationContext</code>는 <code>BeanFactory</code>의 서브인터페이스로, 아래와 같은 기능들이 추가되어 있다.
+<ul>
+<li>Spring AOP 기능 통합</li>
+<li>Message reousrce handling 및 다국어화</li>
+<li>이벤트 발행</li>
+<li>Application-layer 레벨에서의 구체화된 기능. 예를 들면, <code>WebApplicationContext</code>는 웹 애플리케이션 내에서의 컨텍스트 정보를 다룰 수 있는 추가적인 기능을 제공한다.</li>
+</ul>
+</li>
+<li>다시 말해, BeanFactory의 경우 설정 프레임워크로서의 기본적인 기능을 제공하고, ApplicationContext는 보다 엔터프라이즈에 특화된 기능들을 제공한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>스프링에서 애플리케이션을 구성하는 많은 종류의 객체들은 초기화부터 구성까지 모두 IoC 컨테이너에 의해 관리되며, 그렇게 관리되는 객체들을 <strong>Bean</strong>이라고 부른다.</p>
+</li>
+<li>
+<p><strong>Bean</strong>들이 서로 갖게되는 의존성을 포함해 모든 관리적 요소들은 IoC 컨테이너가 사용하는 <code>Configuration Metadata</code>에 의해 반영된다.</p>
+</li>
+</ul>
+<h3 id="container-overview">Container Overview</h3>
+<hr>
+<ul>
+<li>
+<p>기본적으로 스프링 프레임워크에서의 IoC 컨테이너는 구현체 관점에서는 <code>ApplicationContext</code>의 구현체라고 볼 수 있다.</p>
+<ul>
+<li><code>BeanFactory</code>를 사용할 수도 있지만 (<code>ApplicationContext</code>가 <code>BeanFactory</code>의 완전한 Sub-set이기 때문에), 여기에서는 <code>ApplicationContext</code>를 이용해 설명한다.</li>
+<li>IoC 컨테이너는 자신의 관리 하에 둘 빈(생성부터 설정까지 담당할)들이 무엇인지 알기 위해 <code>Configuration metadata</code>를 읽는다.</li>
+<li><code>Configuration meta</code>는 주로 XML, Java annotation, Java code 등을 이용해 작성될 수 있다.</li>
+</ul>
+</li>
+<li>
+<p><strong>즉, 개발자는 자신의 애플리케이션을 구성하는 객체들의 관리를 스프링에게 위임하기 위해 Configuration metadata를 작성해야 한다는 의미</strong></p>
+</li>
+<li>
+<p><code>ApplicationContext</code>의 구현체는 스프링에 의해 제공된다.</p>
+<ul>
+<li>Standalone 애플리케이션의 경우, 주로 <code>ClassPathXmlApplicationContext</code> / <code>FileSystemXmlApplicationContext</code>를 이용해 만드는 것이 일반적이다.</li>
+<li>일반적인 애플리케이션의 경우 직접 이러한 구현체를 만드는 것이 필요하지 않다. 예를 들어 웹 애플리케이션에서는 <code>web.xml</code>이라는 이름의 <code>boilerplate</code> XML을 구성해두면 이를 참조하여 자동적으로 생성된다.
+<ul>
+<li>어떻게 생성되는 것이고, 어떻게 구성해야 하는 것일까? 간략하게 표현하면 스프링의 ContectLoaderListener를 등록해두면 XML파일을 참조해 생성하게 된다 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-create">Ref</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>정리하면, 스프링의 DI를 IoC 컨테이너 기반으로 활용하기 위해서는 아래의 단계가 필요하다.</p>
+<ul>
+<li>IoC 컨테이너가 참조할 Configuration Metadata 작성</li>
+<li>IoC 컨테이너의 초기화</li>
+<li>애플리케이션 내에서 IoC 컨테이너 사용</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-configuration-metadata">1. Configuration Metadata</h3>
+<hr>
+<ul>
+<li>Configuration Metadata를 작성하는 방법
+<ul>
+<li>XML 파일의 형태로 작성</li>
+<li>Annotation 기반 설정 (스프링 2.5부터 추가)
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config">https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config</a></li>
+</ul>
+</li>
+<li>자바 기반 설정 (스프링 3.0부터 추가)
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java">https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="xml-기반-configuration-metadata-작성-예">XML 기반 Configuration Metadata 작성 예</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;...&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">&lt;!--id? a string that identifies the individual bean definition --&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;...&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">&lt;!--class? Fully qualified classname for the type of bean --&gt;</span>
+        <span style="color:#75715e">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+
+    <span style="color:#75715e">&lt;!-- more bean definitions go here --&gt;</span>
+
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><h3 id="2-container-초기화">2. Container 초기화</h3>
+<hr>
+<ul>
+<li><code>ApplicationContext</code>의 생성자에 주어지는 경로들은 IoC 컨테이너로 하여금 어떤 Configuration Metadata를 읽어올지에 대한 정보이다.
+<ul>
+<li>외부 리소스일수도, 로컬 파일 시스템 내의 경로일수도, 자바의 CLASSPATH의 형태일 수도 있다.</li>
+<li>CLASSPATH 내의 Configuration Metadata 파일들을 이용해 컨테이너를 초기화하는 코드
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ApplicationContext context <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassPathXmlApplicationContext<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;services.xml&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;daos.xml&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div><ul>
+<li>위의 <code>services.xml</code>, <code>daos.xml</code>은 애플리케이션에서의 서비스 레이어 / DAO에 해당하는 빈들을 분리하여 정의해놓은 것으로, 그 내용은 아래와 같이 예시로 표현될 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#75715e">&lt;!-- services --&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;petStore&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.samples.jpetstore.services.PetStoreServiceImpl&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;accountDao&#34;</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;accountDao&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;itemDao&#34;</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;itemDao&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#75715e">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#75715e">&lt;!-- more bean definitions for services go here --&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;accountDao&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;itemDao&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.samples.jpetstore.dao.jpa.JpaItemDao&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>  
+    <span style="color:#75715e">&lt;!-- more bean definitions for data access objects go here --&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><ul>
+<li>위의 예제를 살펴보면, <code>PetStoreServiceImpl</code> 타입(class)의 빈은 <code>petStore</code>라는 id로 정의하고 있다.
+<ul>
+<li><code>&lt;property&gt;</code> 태그는 JavaBean Property를 나타내며, <code>name</code> 속성은 해당 Property 이름을 나타낸다. <code>ref</code> 속성은 다른 외부 빈의 정의에 사용되었던 id를 사용한다.</li>
+<li>이는 <code>petStore</code> 빈이 자신의 속성으로 <code>accountDao</code>, <code>itemDao</code>라는 id를 가지는 두개의 Bean을 가지고 있다는 것을 의미하며, 즉 이 두 개의 Dao Bean에 의존성을 갖는다는 뜻이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>정리하면, XML 기반의 Configuration Metadata 작성에 있어서 빈의 의존성을 정의하려면 해당 빈의 정의 내에 <code>&lt;property&gt;</code> 태그를 사용하여 의존하고 있는 Bean을 id를 <code>ref</code>에 명시하면, 해당 의존성은 IoC 컨테이너가 관리해준다!</li>
+<li>XML 파일들을 애플리케이션의 논리적 구성에 따라 분리하고 모두 IoC 컨테이너의 생성자에 넣을 수 있지만, 아래와 같이 하나의 XML 파일 내에서도 다른 XML 파일 내의 내용을 가져오도록 할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;beans&gt;</span>
+  <span style="color:#f92672">&lt;import</span> <span style="color:#a6e22e">resource=</span><span style="color:#e6db74">&#34;services.xml&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;import</span> <span style="color:#a6e22e">resource=</span><span style="color:#e6db74">&#34;resources/messageSource.xml&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;import</span> <span style="color:#a6e22e">resource=</span><span style="color:#e6db74">&#34;/resources/themeSource.xml&#34;</span><span style="color:#f92672">/&gt;</span>
+
+  <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;bean1&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;bean2&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><ul>
+<li>경로 참조시의 기본 위치는 <!-- raw HTML omitted --> 태그를 사용하고 있는 <code>xml</code> 파일의 위치이고, 다른 <code>xml</code> 파일들의 경로는 상대경로/절대경로로 지정될 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-ioc-컨테이너의-사용">3. IoC 컨테이너의 사용</h3>
+<hr>
+<ul>
+<li><code>ApplicationContext</code>를 생성하고 나면, 이를 이용해 현재 등록된 Bean들을 Bean Registry로부터 가져와 빈 정보 / 의존성 등을 확인할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// create and configure beans
+</span><span style="color:#75715e"></span>ApplicationContext context <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassPathXmlApplicationContext<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;services.xml&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;daos.xml&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// retrieve configured instance
+</span><span style="color:#75715e"></span>PetStoreService service <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getBean</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;petStore&#34;</span><span style="color:#f92672">,</span> PetStoreService<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// use configured instance
+</span><span style="color:#75715e"></span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> userList <span style="color:#f92672">=</span> service<span style="color:#f92672">.</span><span style="color:#a6e22e">getUsernameList</span><span style="color:#f92672">();</span>
+</code></pre></div></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
