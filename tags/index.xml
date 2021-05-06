@@ -6,31 +6,40 @@
     <description>Recent content in Tags on dwywdo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 May 2021 03:12:19 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 20:48:03 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Bean</title>
-      <link>https://dwywdo.github.io/tags/bean/</link>
-      <pubDate>Wed, 05 May 2021 03:12:19 +0900</pubDate>
+      <title>Dependencies</title>
+      <link>https://dwywdo.github.io/tags/dependencies/</link>
+      <pubDate>Thu, 06 May 2021 20:48:03 +0900</pubDate>
       
-      <guid>https://dwywdo.github.io/tags/bean/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
-      <link>https://dwywdo.github.io/tags/spring/</link>
-      <pubDate>Wed, 05 May 2021 03:12:19 +0900</pubDate>
-      
-      <guid>https://dwywdo.github.io/tags/spring/</guid>
+      <guid>https://dwywdo.github.io/tags/dependencies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DI</title>
       <link>https://dwywdo.github.io/tags/di/</link>
-      <pubDate>Sat, 01 May 2021 16:17:13 +0900</pubDate>
+      <pubDate>Thu, 06 May 2021 20:48:03 +0900</pubDate>
       
       <guid>https://dwywdo.github.io/tags/di/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://dwywdo.github.io/tags/spring/</link>
+      <pubDate>Thu, 06 May 2021 20:48:03 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bean</title>
+      <link>https://dwywdo.github.io/tags/bean/</link>
+      <pubDate>Wed, 05 May 2021 03:12:19 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/tags/bean/</guid>
       <description></description>
     </item>
     

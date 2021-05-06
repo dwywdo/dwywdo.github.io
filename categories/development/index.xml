@@ -6,7 +6,18 @@
     <description>Recent content in Development on dwywdo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 May 2021 03:12:19 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 20:48:03 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Dependencies</title>
+      <link>https://dwywdo.github.io/post/spring-dependencies/</link>
+      <pubDate>Thu, 06 May 2021 20:48:03 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/spring-dependencies/</guid>
+      <description>Dependency Injection    Dependency Injection의 정의는 이미 IoC를 정리할 때 확인하였다.
+ It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
+   DI 원칙이 지켜지면 객체가 자신의 의존성을 직접 관리할 필요 없이, 외부로부터 의존성을 주입받기 때문에 테스트에도 용이하다.</description>
+    </item>
+    
     <item>
       <title>Spring Bean</title>
       <link>https://dwywdo.github.io/post/spring-bean/</link>
@@ -22,7 +33,8 @@
       <pubDate>Sat, 01 May 2021 16:17:13 +0900</pubDate>
       
       <guid>https://dwywdo.github.io/post/spring-ioc/</guid>
-      <description>IoC 컨테이너   스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.   It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
+      <description>IoC 컨테이너    스프링 프레임워크에서 지키며 기능으로서 제공하는 IoC 원칙은 의존성 주입 (Dependency Injection, DI)라고도 불린다.
+ It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method.
    위의 문구는 Spring framework documentation에서 IoC에 대해 설명한 문장을 발췌해온 것으로, 풀어 써보면 아래와 같다.</description>
     </item>
     
