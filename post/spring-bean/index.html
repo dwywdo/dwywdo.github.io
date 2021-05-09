@@ -65,7 +65,7 @@
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          4 min read
+          5 min read
         </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
@@ -198,15 +198,85 @@
 <h3 id="빈-인스턴스의-초기화는-실제로-어떻게-진행될까">빈 인스턴스의 초기화는 실제로 어떻게 진행될까?</h3>
 <hr>
 <ul>
-<li>위에서 가볍게 언급했듯, 스프링은 DI 메커니즘의 하나로 생성자 혹은 팩토리 메서드를 이용하여 빈을 생성한다.
+<li>
+<p>위에서 가볍게 언급했듯, 스프링은 DI 메커니즘의 하나로 생성자 혹은 팩토리 메서드를 이용하여 빈을 생성한다.</p>
 <ul>
 <li>생성자를 이용</li>
 <li>Static 팩토리 메소드 이용</li>
 <li>인스턴스 non-static 팩토리 메소드 이용</li>
 </ul>
 </li>
-<li>다만 이를 이해하기 위해서는 스프링에서 Dependencies를 다루는 방식에 대해 같이 정리되면 좋을 것 같다. 실제 문서에도 그 쪽을 더 자세히 보라고 되어 있다(..)</li>
-<li>다음에 <code>Dependencies</code> 부분을 읽을 때 정리해보도록 하자..</li>
+<li>
+<p>위에서와 마찬가지로 XML 기반의 Configuration Metadata를 기준으로 초기화 방식을 지정하는 방법들을 살펴보자</p>
+</li>
+</ul>
+<h4 id="생성자를-이용한-빈-인스턴스의-초기화">생성자를 이용한 빈 인스턴스의 초기화</h4>
+<ul>
+<li>XML 파일의 <!-- raw HTML omitted --> 태그의 <code>class</code> 속성에 컨테이너에 의해서 생성될 빈의 타입 클래스를 지정하여 준다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;exampleBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.ExampleBean&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;anotherExampleBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.AnotherExampleBean&#34;</span><span style="color:#f92672">&gt;</span>
+</code></pre></div><ul>
+<li>위와 같이 지정해주면, 스프링 컨테이너는 해당 클래스의 생성자를 찾아 그를 이용하여 의존성을 주입하고, 빈을 생성한다.</li>
+</ul>
+<h4 id="static-factory-method를-이용한-빈-인스턴스의-초기화">Static Factory Method를 이용한 빈 인스턴스의 초기화</h4>
+<ul>
+<li><!-- raw HTML omitted --> 태그의 <code>class</code> 속성에 팩토리 메소드를 갖고 있는 클래스의 타입을 지정하고, <code>factory-method</code> 속성에는 팩토리 메소드의 이름을 지정한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;clientService&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.ClientService&#34;</span> <span style="color:#a6e22e">factory-method=</span><span style="color:#e6db74">&#34;createInstance&#34;</span><span style="color:#f92672">&gt;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientService</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> ClientService clientService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClientService<span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">ClientService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ClientService <span style="color:#a6e22e">createInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> clientService<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h4 id="instance-factory-method를-이용한-빈-인스턴스의-초기화">Instance Factory Method를 이용한 빈 인스턴스의 초기화</h4>
+<ul>
+<li><!-- raw HTML omitted --> 태그의 <code>class</code> 속성은 지정하지 않고, <code>factory-method</code> 속성에는 빈 객체 생성을 위해 사용될(invoke)될 메소드의 이름을 지정한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;serviceLocator&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;examples.DefaultServiceLocator&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#75715e">&lt;!-- inject any dependencies required by this locator bean --&gt;</span>
+<span style="color:#f92672">&lt;/bean&gt;</span>
+
+<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;clientService&#34;</span>
+    <span style="color:#a6e22e">factory-bean=</span><span style="color:#e6db74">&#34;serviceLocator&#34;</span>
+    <span style="color:#a6e22e">factory-method=</span><span style="color:#e6db74">&#34;createClientServiceInstance&#34;</span><span style="color:#f92672">/&gt;</span>
+
+<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;accountService&#34;</span>
+    <span style="color:#a6e22e">factory-bean=</span><span style="color:#e6db74">&#34;serviceLocator&#34;</span>
+    <span style="color:#a6e22e">factory-method=</span><span style="color:#e6db74">&#34;createAccountServiceInstance&#34;</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><ul>
+<li>별도의 객체 (Service) 생성을 위한 팩토리 클래스(DefaultServiceLocator)가 있기 때문에, 이 클래스에 대해서도 빈을 만들어 준다.</li>
+<li>팩토리 클래스 빈에 의해 생성될 빈에 대한 빈 정의에 <code>class</code> 속성이 부여되지 않았음을 알 수 있다. 위의 파일은 아래의 자바 코드와 대응된다.</li>
+<li>팩토리 클래스가 하나의 클래스 생성을 위해서만 쓰이는 것은 아니므로, 복수 개도 당연히 가능하다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DefaultServiceLocator</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> ClientService clientService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClientServiceImpl<span style="color:#f92672">();</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> AccountService accountService <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AccountServiceImpl<span style="color:#f92672">();</span>
+
+    <span style="color:#66d9ef">public</span> ClientService <span style="color:#a6e22e">createClientServiceInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> clientService<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> AccountService <span style="color:#a6e22e">createAccountServiceInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> accountService<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li><strong>Factory Bean</strong>?
+<ul>
+<li>스프링에서의 <code>factory bean</code>이라 하면 스프링 컨테이너에 의해 구성되며, 팩토리 메소드를 이용해 객체를 만드는데에 사용되는 또 다른 빈을 의미한다.
+<ul>
+<li>일반적 의미로 쓰이는 팩토리 클래스와 유사하게 생각할 수 있을 것 같다.</li>
+</ul>
+</li>
+<li>다만 <code>FactoryBean</code> 클래스는 완전히 다른 개념으로, Instantiation 과정을 커스터마이징 할 수 있도록 특정 목적을 가지고 구현된 클래스이다.</li>
+</ul>
+</li>
 </ul>
 <h3 id="runtime-환경에서의-빈-타입-확인">Runtime 환경에서의 빈 타입 확인</h3>
 <hr>

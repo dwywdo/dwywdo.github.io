@@ -6,7 +6,16 @@
     <description>Recent content in Development on dwywdo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 20:48:03 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 21:59:49 +0900</lastBuildDate><atom:link href="https://dwywdo.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Annotation Based Container Configuration - @Required, @Autowired</title>
+      <link>https://dwywdo.github.io/post/spring-annotation-based-container-configuration-requiredautowired/</link>
+      <pubDate>Thu, 06 May 2021 21:59:49 +0900</pubDate>
+      
+      <guid>https://dwywdo.github.io/post/spring-annotation-based-container-configuration-requiredautowired/</guid>
+      <description>Annotation 기반의 스프링 컨테이너 구성   자바의 Annotation을 사용하여 XML 설정 파일 대신, 바이트 코드에 존재하는 메타데이터를 기반으로 빈의 의존성 등을 구성(Wiring Up)할 수 있다. XML 방식 이전에 수행된다. 따라서, 같은 빈에 대한 Property 설정이 두 가지 방법에 의해 모두 적용되어 있으면 XML의 설정이 Overriding하게 된다. XML 방식과의 장단점 비교  XML 방식의 경우 소스코드를 직접적으로 건드리지 않고 빈을 구성할 수 있다. 또한 설정 파일이 중앙집중화되어 관리하기 편하다. Annotation 방식의 경우 설정 정보들이 소스코드 내에 존재하게 되어 탈집중화되지만, 보다 짧고 간결하게 빈 구성 정보를 명시할 수 있다.</description>
+    </item>
+    
     <item>
       <title>Spring Dependencies</title>
       <link>https://dwywdo.github.io/post/spring-dependencies/</link>

@@ -2,31 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dwywdo.github.io/categories/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
+    <loc>https://dwywdo.github.io/tags/annotation/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
   </url><url>
-    <loc>https://dwywdo.github.io/tags/dependencies/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
+    <loc>https://dwywdo.github.io/categories/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/configuration/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
   </url><url>
     <loc>https://dwywdo.github.io/categories/development/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/spring/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/post/spring-annotation-based-container-configuration-requiredautowired/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/</loc>
+    <lastmod>2021-05-06T21:59:49+09:00</lastmod>
+  </url><url>
+    <loc>https://dwywdo.github.io/tags/dependencies/</loc>
     <lastmod>2021-05-06T20:48:03+09:00</lastmod>
   </url><url>
     <loc>https://dwywdo.github.io/tags/di/</loc>
     <lastmod>2021-05-06T20:48:03+09:00</lastmod>
   </url><url>
-    <loc>https://dwywdo.github.io/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
-  </url><url>
-    <loc>https://dwywdo.github.io/post/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
-  </url><url>
-    <loc>https://dwywdo.github.io/tags/spring/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
-  </url><url>
     <loc>https://dwywdo.github.io/post/spring-dependencies/</loc>
-    <lastmod>2021-05-06T20:48:03+09:00</lastmod>
-  </url><url>
-    <loc>https://dwywdo.github.io/tags/</loc>
     <lastmod>2021-05-06T20:48:03+09:00</lastmod>
   </url><url>
     <loc>https://dwywdo.github.io/tags/bean/</loc>

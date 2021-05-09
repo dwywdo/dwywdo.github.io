@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Spring Annotation Based Container Configuration - @Required, @Autowired // dwywdo</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.82.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="dwywdo" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dwywdo.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring Annotation Based Container Configuration - @Required, @Autowired"/>
+<meta name="twitter:description" content="Annotation 기반의 스프링 컨테이너 구성   자바의 Annotation을 사용하여 XML 설정 파일 대신, 바이트 코드에 존재하는 메타데이터를 기반으로 빈의 의존성 등을 구성(Wiring Up)할 수 있다. XML 방식 이전에 수행된다. 따라서, 같은 빈에 대한 Property 설정이 두 가지 방법에 의해 모두 적용되어 있으면 XML의 설정이 Overriding하게 된다. XML 방식과의 장단점 비교  XML 방식의 경우 소스코드를 직접적으로 건드리지 않고 빈을 구성할 수 있다. 또한 설정 파일이 중앙집중화되어 관리하기 편하다. Annotation 방식의 경우 설정 정보들이 소스코드 내에 존재하게 되어 탈집중화되지만, 보다 짧고 간결하게 빈 구성 정보를 명시할 수 있다."/>
+
+    <meta property="og:title" content="Spring Annotation Based Container Configuration - @Required, @Autowired" />
+<meta property="og:description" content="Annotation 기반의 스프링 컨테이너 구성   자바의 Annotation을 사용하여 XML 설정 파일 대신, 바이트 코드에 존재하는 메타데이터를 기반으로 빈의 의존성 등을 구성(Wiring Up)할 수 있다. XML 방식 이전에 수행된다. 따라서, 같은 빈에 대한 Property 설정이 두 가지 방법에 의해 모두 적용되어 있으면 XML의 설정이 Overriding하게 된다. XML 방식과의 장단점 비교  XML 방식의 경우 소스코드를 직접적으로 건드리지 않고 빈을 구성할 수 있다. 또한 설정 파일이 중앙집중화되어 관리하기 편하다. Annotation 방식의 경우 설정 정보들이 소스코드 내에 존재하게 되어 탈집중화되지만, 보다 짧고 간결하게 빈 구성 정보를 명시할 수 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dwywdo.github.io/post/spring-annotation-based-container-configuration-requiredautowired/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-06T21:59:49&#43;09:00" />
+<meta property="article:modified_time" content="2021-05-06T21:59:49&#43;09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dwywdo.github.io"><img class="app-header-avatar" src="/images/dawn.jpeg" alt="dwywdo" /></a>
+      <h1>dwywdo</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+            <br><br>
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p> </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/dwywdo" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Spring Annotation Based Container Configuration - @Required, @Autowired</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 6, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://dwywdo.github.io/tags/spring/">Spring</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/configuration/">Configuration</a>
+              <a class="tag" href="https://dwywdo.github.io/tags/annotation/">Annotation</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="annotation-기반의-스프링-컨테이너-구성">Annotation 기반의 스프링 컨테이너 구성</h2>
+<hr>
+<ul>
+<li>자바의 Annotation을 사용하여 XML 설정 파일 대신, 바이트 코드에 존재하는 메타데이터를 기반으로 빈의 의존성 등을 구성(Wiring Up)할 수 있다.</li>
+<li>XML 방식 이전에 수행된다. 따라서, 같은 빈에 대한 Property 설정이 두 가지 방법에 의해 모두 적용되어 있으면 XML의 설정이 Overriding하게 된다.</li>
+<li>XML 방식과의 장단점 비교
+<ul>
+<li>XML 방식의 경우 소스코드를 직접적으로 건드리지 않고 빈을 구성할 수 있다. 또한 설정 파일이 중앙집중화되어 관리하기 편하다.</li>
+<li>Annotation 방식의 경우 설정 정보들이 소스코드 내에 존재하게 되어 탈집중화되지만, 보다 짧고 간결하게 빈 구성 정보를 명시할 수 있다.</li>
+</ul>
+</li>
+<li>Annotation 기반의 설정을 사용한다는 것은 BeanPostProcessor의 기능을 확장한 <code>AutowiredAnnotationBeanPostProcessor</code>를 사용하게 되는 것이다.
+<blockquote>
+<p>AutowiredAnnotationBeanPostProcessor — a BeanPostProcessor implementation that ships with the Spring distribution and autowires annotated fields, setter methods, and arbitrary config methods.</p>
+</blockquote>
+</li>
+<li>스프링에서 컨테이너를 구성하기 위해 제공하는 애노테이션들은 아래와 같은 것들이 있다.
+<ul>
+<li><code>@Required</code></li>
+<li><code>@Autowired</code></li>
+<li><code>@Primary</code></li>
+<li><code>@Qualifier</code></li>
+<li><code>@Resource</code></li>
+<li><code>@Value</code></li>
+<li>JSR-330 (Dependency Injection for Java) 지원을 위한 <code>@PostConstruct</code> / <code>@PreDestory</code></li>
+</ul>
+</li>
+<li>기본적으로 부트 없이 스프링을 구성할 때에 XML 파일의 설정을 이용, post-processor를 빈 정의 별로 등록할 수 있으나, 아래와 같이 여러 BeanPostProcessor들을 등록할 수 있다
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xmlns:context=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/context&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#e6db74">        http://www.springframework.org/schema/context
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/context/spring-context.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+
+    <span style="color:#f92672">&lt;context:annotation-config/&gt;</span>
+
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><ul>
+<li><a href="context:annotation-config/">context:annotation-config/</a> 요소는 아래의 post-processor들을 등록한다.
+<ul>
+<li><code>ConfigurationClassPostProcessor</code></li>
+<li><code>AutowiredAnnotationBeanPostProcessor</code></li>
+<li><code>CommonAnnotationBeanPostProcessor</code></li>
+<li><code>PersistenceAnnotationBeanPostProcessor</code></li>
+<li><code>EventListenerMethodProcessor</code></li>
+</ul>
+</li>
+<li>위의 요소는 같은 애플리케이션 컨텍스트 내에 정의된 빈들에 존재하는 애노테이션만 확인한다. 예를 들어, <code>WebApplicationContext</code>에 등록하게 되면 컨트롤러가 아닌 서비으 존재하는 빈들의 애노테이션들은 확인하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="required-deprecated-in-spring-framework-51"><code>@Required</code> (Deprecated in Spring Framework 5.1)</h3>
+<ul>
+<li>빈의 Property를 지정하는 Setter 메소드에 적용할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleMovieLister</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> MovieFinder movieFinder<span style="color:#f92672">;</span>
+
+  <span style="color:#a6e22e">@Required</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMovieFinder</span><span style="color:#f92672">(</span>MovieFinder movieFinder<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">movieFinder</span> <span style="color:#f92672">=</span> movieFinder<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>Required라는 이름에서 알 수 있듯이, XML 파일을 통해서 Configuration 타임에 해당 필드는 반드시 populate되어야 함을 의미한다. (명시적으로 BeanDefinition의 property를 지정하는 방식이든, Autowiring에 의해서든)</li>
+<li>Population이 되지 않았다고 해서 자동으로 채워주는 것은 아니다. Missing Bean에 대한 NPE를 방지하기 위한 것.</li>
+<li>사용하기 위해서는 `RequiredAnnotationBeanPostProcessor가 반드시 빈에 등록되어야 한다.</li>
+<li>스프링 5.1부터는 공식적으로 Deprecation 되었다. 이 방식보다는 생성자 주입 방식을 사용하거나, InitializingBean.afterPropertiesSet()를 직접 구현하거나, 커스터마이징한 @PostConstruct 애노테이션을 활용하는 방식이 더욱 선호된다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="autowired"><code>@Autowired</code></h3>
+<ul>
+<li><code>Autowiring</code>: 의존성을 따로 명시하지 않고도 자동적으로 주입해줄 수 있도록 하는 스프링의 메커니즘</li>
+<li><code>@Autowired</code> 애노테이션을 사용하면, XML에서의 빈의 의존성을 지정하기 위해 사용했던 <!-- raw HTML omitted --> 태그 요소를 작성하지 않고도 빈의 구성 시점에 의존성을 주입할 수 있다.</li>
+<li><code>@Autowired</code> 애노테이션을 사용할 수 있는 위치는 빈 클래스의 아래 3군데이다.
+<ul>
+<li>생성자 메소드: XML 설정에서의 <!-- raw HTML omitted --> 태그를 대체한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> CustomerPreferenceDao customerPreferenceDao<span style="color:#f92672">;</span>
+
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">MovieRecommender</span><span style="color:#f92672">(</span>CustomerPreferenceDao customerPreferenceDao<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">customerPreferenceDao</span> <span style="color:#f92672">=</span> customerPreferenceDao<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xmlns:context=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/context&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#e6db74">        http://www.springframework.org/schema/context
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/context/spring-context.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;context:annotation-config/&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;movieRecommender&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.MovieRecommender&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#75715e">&lt;!-- 아래의 설정 없이도 @Autowired로 의존성을 해결하는 것이 가능하다.
+</span><span style="color:#75715e">        &lt;constructor-arg ref=&#34;customPreferenceDao&#34;/&gt;
+</span><span style="color:#75715e">      --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;customPreferenceDao&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.CustomPreferenceDao&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div></li>
+<li>일반적인 Setter 메소드: XML 설정에서의 <!-- raw HTML omitted --> 태그를 대체한다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> CustomPreferenceDao customPreferenceDao<span style="color:#f92672">;</span>
+
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setCustomPreferenceDao</span><span style="color:#f92672">(</span>CustomPreferenceDao customPreferenceDao<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">customPreferenceDao</span> <span style="color:#f92672">=</span> customPreferenceDao<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+    <span style="color:#a6e22e">xmlns:context=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/context&#34;</span>
+    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span style="color:#e6db74">        http://www.springframework.org/schema/context
+</span><span style="color:#e6db74">        https://www.springframework.org/schema/context/spring-context.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;context:annotation-config/&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;movieRecommender&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.MovieRecommender&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#75715e">&lt;!-- 아래의 설정 없이도 @Autowired로 의존성을 해결하는 것이 가능하다.
+</span><span style="color:#75715e">        &lt;property name=&#34;customPreferenceDaoForMovieRecommender&#34; ref=&#34;customPreferenceDao&#34;/&gt;
+</span><span style="color:#75715e">      --&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+
+    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;customPreferenceDao&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;me.dwywdo.example.CustomPreferenceDao&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;/bean&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div></li>
+<li>필드: XML 설정에서의 <!-- raw HTML omitted --> 태그를 대체하면서, Setter 메소드 없이도 의존성의 주입이 가능하다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> CustomPreferenceDao customPreferenceDao<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="배열-혹은-컬렉션-타입에-대한-autowired의-적용">배열 혹은 컬렉션 타입에 대한 @Autowired의 적용</h4>
+<ul>
+<li>Array / Set 등의 컬렉션 타입에 <code>@Autowired</code>를 적용하게 되면 <code>ApplicationContext</code>로부터 해당 타입에 속하는 빈들을 모두 주입받을 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">private</span> MovieCatalog<span style="color:#f92672">[]</span> movieCatalogs<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> Set<span style="color:#f92672">&lt;</span>MovieCatalog<span style="color:#f92672">&gt;</span> movieCatalogs<span style="color:#f92672">;</span>
+    
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMovieCatalogs</span><span style="color:#f92672">(</span>Set<span style="color:#f92672">&lt;</span>MovieCatalog<span style="color:#f92672">&gt;</span> movieCatalogs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">movieCatalogs</span> <span style="color:#f92672">=</span> movieCatalogs<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li><code>Map&lt;T&gt;</code>의 경우도 키의 타입이 <code>String</code>이라면 주입받을 수 있다. 이 경우 키의 값은 해당 빈의 name이 된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MovieRecommender</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> MovieCatalog<span style="color:#f92672">&gt;</span> movieCatalogs<span style="color:#f92672">;</span>
+
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMovieCatalogs</span><span style="color:#f92672">(</span>Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> MovieCatalog<span style="color:#f92672">&gt;</span> movieCatalogs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">movieCatalogs</span> <span style="color:#f92672">=</span> movieCatalogs<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>다만, 배열 혹은 컬렉션에 Autowiring을 적용하는 경우 최소 하나의 빈은 존재해야 한다. 그렇지 않으면 실패한다.
+<ul>
+<li><code>@Autowired</code>가 적용되는 대상 빈들은 @Required가 적용된 것처럼 필수 의존성으로 간주된다. 이를 바꾸고 싶으면 <code>@Autowired(required = false)</code>와 같이 선언해주면 된다.</li>
+<li>이 경우 빈 생성 과정에서는 존재하는 의존성에 해당하는 빈이 없으면 주입을 시도하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="autowired를-묵시적으로-생략할-수-있는-경우">@Autowired를 묵시적으로 생략할 수 있는 경우</h4>
+<ul>
+<li>빈의 대상 클래스에 생성자가 하나밖에 없는 경우, @Autowired를 생략할 수 있다.</li>
+<li>생성자가 public일 필요는 없다.</li>
+<li>왜 이런 경우가 발생할까? 생성자가 여러 개인 경우를 생각해보자.
+<ul>
+<li>아마 개발자는 스프링이 빈 구성 시에 사용할 생성자를 지정하기 위해 하나의 생성자에 <code>@Autowired(required=true)</code>를 줄 수 있다.</li>
+<li>만약 여러 생성자에 <code>@Autowired</code>를 붙이게 되면 그 생성자들은 모두 <code>required=false</code>를 주어야 한다.
+<ul>
+<li>이 경우 스프링은 가장 많은 의존성을 충족시킬 수 있는 생성자를 사용하고, 아무것도 없다면 primary/default 생성자가 사용된다.</li>
+<li>유사하게 애노테이션이 아예 붙어있지 않으면 primary/default 생성자가 사용된다.</li>
+</ul>
+</li>
+<li>생성자가 하나인 경우, 애노테이션이 되어있지 않아도 그 생성자를 사용하여 Autowiring을 수행한다.</li>
+</ul>
+</li>
+<li>따라서 주로 사용하게 되는 패턴은 해당 빈이 가지는 모든 의존성을 생성자의 인자로 구성하고, 단 하나만의 생성자를 두는 것</li>
+</ul>
+<h4 id="optional--nullable의-활용">Optional / @Nullable의 활용</h4>
+<ul>
+<li>자바 8에 도입된 <code>java.util.Optional</code>을 이용해 Non-required 의존성을 표현할 수도 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleMovieLister</span> <span style="color:#f92672">{</span>
+  <span style="color:#a6e22e">@Autowired</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMovieFinder</span><span style="color:#f92672">(</span>Optional<span style="color:#f92672">&lt;</span>MovieFinder<span style="color:#f92672">&gt;</span> movieFinder<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ... 
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>스프링 5.0부터는 <code>@Nullable</code> 애노테이션을 활용(<code>java.annotation.Nullable from JSR-305</code>도 가능)하여 같은 기능을 수행할 수 있다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleMovieLister</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Autowired</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMovieFinder</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Nullable</span> MovieFinder movieFinder<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#f92672">...</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="autowired가-적용될-수-있는-더-다양한-곳">@Autowired가 적용될 수 있는 더 다양한 곳</h4>
+<ul>
+<li>ApplicationContext, Environment, ResourceLoader, ApplicationEventPublisher, MessageSource나 이들의 구현체에도 사용할 수 있다.</li>
+<li>다만, <code>@Autowired</code>, <code>@Inject</code>, <code>@Value</code>, <code>@Resource</code> 등은 BeanPostProcessor 구현에 의해 처리되는 것이기 때문에 이곳에는 적용할 수 없다.
+<ul>
+<li>따라서 의존성을 부여하고 싶다면 XML이나, <code>@Bean</code> 애노테이션을 사용해야 한다.</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
